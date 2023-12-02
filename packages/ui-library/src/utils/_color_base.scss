@@ -1,0 +1,17 @@
+@use 'default_color_values' as *;
+
+:root {
+  --color-primary-700: #{$lit-color-primary-700};
+  --color-grayscale-700: #{$lit-color-grayscale-700};
+  --color-grayscale-800: #{$lit-color-grayscale-800};
+  --color-grayscale-600: #{$lit-color-grayscale-600};
+  --color-grayscale-500: #{$lit-color-grayscale-500};
+  --color-grayscale-200: #{$lit-color-grayscale-200};
+  --color-destructive-500: #{$lit-color-destructive-500};
+  --color-destructive-600: #{$lit-color-destructive-600};
+  --color-destructive-200: #{$lit-color-destructive-200};
+  --color-custom-green-500: #{$lit-color-custom-green-500};
+  --color-custom-green-200: #{$lit-color-custom-green-200};
+  --color-text-800: #{$lit-color-text-800};
+  --color-text-600: #{$lit-color-text-600};
+}

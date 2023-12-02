@@ -1,0 +1,12 @@
+@use 'src/utils/color_base';
+
+.table {
+  overflow-y: scroll;
+  border: 0.1rem solid var(--color-grayscale-700);
+}
+
+th {
+  color: var(--color-text-800);
+  margin: 0;
+  padding: 0.5rem;
+}
