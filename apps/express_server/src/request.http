@@ -1,0 +1,37 @@
+GET http://localhost:8000/device
+
+###
+
+POST http://localhost:8000/device
+Content-Type: application/json
+
+{
+    "name": "device",
+    "model": "CC2L"
+}
+
+###
+POST http://localhost:8000/device/auto-data
+Content-Type: application/json
+
+{
+    "dataSize": 30
+}
+
+###
+
+GET http://localhost:8000/device/search
+Content-Type: application/json
+
+{
+    "model": ""
+}
+
+###
+DELETE  http://localhost:8000/device
+Content-Type: application/json
+
+{
+    "name": "device"
+}
+###
