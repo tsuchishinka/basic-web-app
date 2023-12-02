@@ -12,17 +12,16 @@
 }
 
 .button-primary {
-  
   border: none;
+}
+
+.button-primary:hover {
+  opacity: 0.7;
 }
 
 .button-primary-blue {
   color: white;
   background-color: var(--color-primary-700);
-}
-.button-primary-blue:hover {
-  background-color: var(--color-primary-700);
-  opacity: 0.7;
 }
 
 .button-primary-red {
@@ -30,17 +29,10 @@
   background-color: var(--color-destructive-600);
 }
 
-.button-primary-red:hover {
-  opacity: 0.7;
-}
 
 .button-primary-green {
   color: white;
   background-color: var(--color-custom-green-500);
-}
-
-.button-primary-green:hover {
-  opacity: 0.7;
 }
 
 .button-primary-gray {
@@ -48,34 +40,32 @@
   background-color: var(--color-grayscale-600);
 }
 
-.button-primary-gray:hover {
-  opacity: 0.7;
+.button-secondary {
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
 }
 
-.button-secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+.button-secondary:hover {
+  background-color: var(--color-grayscale-300);
 }
 
 .button-secondary-blue {
   color: var(--color-primary-700);
-  background-color: #fff;
   border: 0.15rem solid var(--color-primary-700);
 }
+
 .button-secondary-red {
   color: var(--color-destructive-500);
-  background-color: #fff;
   border: 0.15rem solid var(--color-destructive-500);
 }
 
 .button-secondary-green {
   color: var(--color-custom-green-500);
-  background-color: #fff;
   border: 0.15rem solid var(--color-custom-green-500);
 }
 
 .button-secondary-gray {
   color: var(--color-grayscale-600);
-  background-color: #fff;
   border: 0.15rem solid var(--color-grayscale-600);
 }
 
