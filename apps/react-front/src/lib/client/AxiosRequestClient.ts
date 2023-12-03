@@ -23,7 +23,7 @@ export class AxiosRequestClient implements ApiRequestClient {
       params: convertParamCase(params),
       headers,
     })
-    return convertResponseCase(response)
+    return convertResponseCase(response.data)
   }
 
   async post<T>({
@@ -38,7 +38,7 @@ export class AxiosRequestClient implements ApiRequestClient {
       data: encode(contentType, convertParamCase(data)),
       headers,
     })
-    return convertResponseCase(response)
+    return convertResponseCase(response.data)
   }
 
   async delete<T>({ url, params, headers }: DeleteConfigTypes): Promise<T> {
@@ -48,6 +48,6 @@ export class AxiosRequestClient implements ApiRequestClient {
       params: convertParamCase(params),
       headers,
     })
-    return convertResponseCase(response)
+    return convertResponseCase(response.data)
   }
 }

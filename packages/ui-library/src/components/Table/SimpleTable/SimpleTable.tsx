@@ -3,7 +3,7 @@ import styles from './SimpleTable.module.scss'
 
 export type SimpleTableProps = {
   list: string[][]
-  headerList?: string[]
+  headerList: string[]
 }
 
 const _SimpleTable = ({ list, headerList }: SimpleTableProps) => {
@@ -17,7 +17,7 @@ const _SimpleTable = ({ list, headerList }: SimpleTableProps) => {
         </tr>
         {list.map((itemRow) => {
           return (
-            <tr key={itemRow[0]}>
+            <tr key={itemRow[1]}>
               {itemRow.map((item) => {
                 return <td key={item}>{item}</td>
               })}
