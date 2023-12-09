@@ -32,7 +32,7 @@ export const Button = ({
   size = 'medium',
   color = 'blue',
   label,
-  onClick = undefined,
+  onClick = () => {},
 }: ButtonProps) => {
   return (
     <button
