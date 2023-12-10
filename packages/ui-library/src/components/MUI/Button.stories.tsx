@@ -1,15 +1,26 @@
-import { Button, ButtonProps } from '@mui/material'
+import { Button, ButtonOwnProps } from '@mui/material'
 export default {
   title: 'MUI/Button',
   component: Button,
-  args: { autoFocus: true } as ButtonProps,
+  args: {
+    autoFocus: true,
+    disableRipple: false,
+    variant: 'contained',
+    sx: { width: 'sm' },
+    disableElevation: false,
+    fullWidth: true,
+    size: 'large',
+    disableFocusRipple: true,
+  } as ButtonOwnProps,
 }
 
-export const All = ({ ...args }: ButtonProps) => {
+export const All = ({ ...args }: ButtonOwnProps) => {
   return (
     <>
       <div style={componentStyle}>
-        <Button {...args}>tsucid</Button>
+        <Button {...args} variant={args.variant}>
+          テキストのみ
+        </Button>
       </div>
     </>
   )
