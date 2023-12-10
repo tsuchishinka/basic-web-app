@@ -13,7 +13,7 @@
     "build": "rollup -c",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "prebuild": "rimraf dist",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6009",
     "typegen:scss": "typed-scss-modules src",
     "typegen:scss-watch": "typed-scss-modules src --watch",
     "build-storybook": "storybook build",
