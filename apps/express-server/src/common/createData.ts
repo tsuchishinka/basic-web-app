@@ -1,5 +1,4 @@
-import { DeviceRequest } from '../models/device'
-const DEVICEMODELLIST = {
+const DEVICE_MODEL_LIST = {
   CC2L: ['唯一置き型のカメラ', 'もうすぐ終売になるカメラ', 'セーフィーの大ヒット商材のカメラ'],
   safieOne: ['エッジAIのカメラ', 'デザインなど全てリクエストしたカメラ'],
   'safieGo PTZ': [
@@ -57,14 +56,14 @@ export const randomIndex = (min: number, max: number) => {
   return Math.floor(Math.random() * max + 1)
 }
 
-export const createDeviceData = (): DeviceRequest => {
-  const modelKeys = Object.keys(DEVICEMODELLIST)
+export const createDeviceData = () => {
+  const modelKeys = Object.keys(DEVICE_MODEL_LIST)
   const modelIndex = randomIndex(0, modelKeys.length - 1)
   const model = modelKeys[modelIndex]
-  const keyData = Object.entries(DEVICEMODELLIST).find(([key, value]) => {
+  const keyData = Object.entries(DEVICE_MODEL_LIST).find(([key, value]) => {
     return key === model
   })
   const nameArray = (keyData as string[])[1] as string
   const name = nameArray[randomIndex(0, nameArray.length - 1)]
-  return { model: model, name: name } as DeviceRequest
+  return { model: model, name: name }
 }

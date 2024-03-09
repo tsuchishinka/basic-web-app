@@ -2,12 +2,17 @@ GET http://localhost:8000/device
 
 ###
 
+GET http://localhost:8000/device/39346161323164642d383762
+
+###
+
 POST http://localhost:8000/device
 Content-Type: application/json
 
 {
-    "name": "device",
-    "model": "CC2L"
+    "name": "土田のデバイス500",
+    "model": "CC2L",
+    "description": "古い"
 }
 
 ###
@@ -20,11 +25,14 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8000/device/search
+PATCH  http://localhost:8000/device
 Content-Type: application/json
 
 {
-    "model": ""
+    "id": "32396636626336372d363736",
+    "name": "土田のデバイス500",
+    "model": "CC2L",
+    "description": "古い"
 }
 
 ###
@@ -32,6 +40,6 @@ DELETE  http://localhost:8000/device
 Content-Type: application/json
 
 {
-    "name": "device"
+    "deviceIds": ["65a5522b6b401bc743abf311"]
 }
 ###

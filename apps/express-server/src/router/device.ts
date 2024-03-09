@@ -1,20 +1,18 @@
 import express from 'express'
 import {
-  getAllDevice,
-  getDeviceSearch,
+  fetchDeviceList,
   createDevice,
-  autoCreateDevice,
   deleteDevice,
+  fetchDeviceDetail,
 } from '../controller/device'
 
 const router = express.Router()
-router.get('/', getAllDevice)
 
-router.get('/search', getDeviceSearch)
+router.get('/', fetchDeviceList)
+
+router.get('/:id', fetchDeviceDetail)
 
 router.post('/', createDevice)
-
-router.post('/auto-data', autoCreateDevice)
 
 router.delete('/', deleteDevice)
 
