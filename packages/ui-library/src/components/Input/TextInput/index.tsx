@@ -1,8 +1,8 @@
-import { memo, useState } from 'react'
+import { forwardRef, memo, useState } from 'react'
 import clsx from 'clsx'
-import styles from './TextInput.module.scss'
+import styles from './index.module.scss'
 
-export type TextInputProps = {
+export interface TextInputProps extends React.HTMLAttributes<HTMLInputElement> {
   /** value  */
   value?: string
   /** 非活性になるか否か */
@@ -13,44 +13,57 @@ export type TextInputProps = {
   placeholder?: string
   /** type */
   type?: React.HTMLInputTypeAttribute
-  /** valueの値が変わった際のイベントハンドラ */
-  onChange: (val: string) => void
 }
 
-const _TextInput = ({ value, onChange, placeholder, disabled, type, error }: TextInputProps) => {
-  const [focus, setFocus] = useState(false)
+const _TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  (
+    {
+      value,
+      placeholder,
+      disabled = false,
+      type,
+      error,
+      onChange,
+      onKeyDown,
+      onSelect,
+      onInput,
+    }: TextInputProps,
+    ref,
+  ) => {
+    const [focus, setFocus] = useState(false)
 
-  const onChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value)
-  }
+    const styleWrapper = () => {
+      const styleArray = [styles['text-input']]
+      if (disabled) {
+        styleArray.push(styles.disabled)
+      }
+      if (error) {
+        styleArray.push(styles.error)
+      }
+      if (focus) {
+        styleArray.push(styles.focus)
+      }
+      return styleArray
+    }
 
-  const styleWrapper = () => {
-    const styleArray = [styles['text-input']]
-    if (disabled) {
-      styleArray.push(styles.disabled)
-    }
-    if (error) {
-      styleArray.push(styles.error)
-    }
-    if (focus) {
-      styleArray.push(styles.focus)
-    }
-    return styleArray
-  }
-
-  return (
-    <div className={clsx(styleWrapper())}>
-      <input
-        value={value}
-        placeholder={placeholder}
-        type={type}
-        disabled={disabled}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-        onChange={onChangeEvent}
-      />
-    </div>
-  )
-}
+    return (
+      <div className={clsx(styleWrapper())}>
+        <input
+          ref={ref}
+          value={value}
+          placeholder={placeholder}
+          type={type}
+          disabled={disabled}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          onSelect={onSelect}
+          onInput={onInput}
+        />
+      </div>
+    )
+  },
+)
 
 export const TextInput = memo(_TextInput)
