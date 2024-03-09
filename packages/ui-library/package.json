@@ -13,7 +13,7 @@
     "build": "rollup -c",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "prebuild": "rimraf dist",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6009",
     "typegen:scss": "typed-scss-modules src",
     "typegen:scss-watch": "typed-scss-modules src --watch",
     "build-storybook": "storybook build",
@@ -24,13 +24,17 @@
     "type": "git"
   },
   "dependencies": {
+    "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook-addon-react-router-v6": "^2.0.9",
-    "modern-normalize": "^2.0.0"
+    "storybook-addon-react-router-v6": "^2.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.20",
+    "@mui/x-data-grid": "^6.18.4",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
