@@ -1,30 +1,18 @@
-import React from 'react'
-import { Button, ButtonProps } from '.'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '.'
 
-export default {
+const meta = {
   title: 'Button/Button',
   component: Button,
-  args: { label: 'tsuchida' },
-}
+  tags: ['autodocs'],
+} satisfies Meta<typeof Button>
 
-export const All = ({ ...args }: ButtonProps) => {
-  return (
-    <>
-      <div style={buttonWrapStyle}>
-        <Button
-          label={args.label}
-          variant={args.variant}
-          color={args.color}
-          size={args.size}
-          onClick={args.onClick}
-        />
-      </div>
-    </>
-  )
-}
+export default meta
+type Story = StoryObj<typeof meta>
 
-const buttonWrapStyle: React.CSSProperties = {
-  display: 'flex',
-  gap: '10px',
-  padding: '10px',
+export const Default: Story = {
+  args: {
+    size: 'large',
+    label: 'Button',
+  },
 }
