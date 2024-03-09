@@ -6,6 +6,9 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "declaration": false,
+    "declarationMap": false,
+    "composite": false
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"]
