@@ -15,7 +15,6 @@ export class DeviceService extends DeviceRequestClient implements IDeviceService
       url: '/device',
       params,
     })
-    console.log(`response: ${JSON.stringify(response)}`)
     return response
   }
 }

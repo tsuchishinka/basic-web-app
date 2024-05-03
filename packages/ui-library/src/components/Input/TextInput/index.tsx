@@ -1,4 +1,4 @@
-import { forwardRef, memo, useState } from 'react'
+import { FocusEventHandler, forwardRef, memo, useCallback, useState } from 'react'
 import clsx from 'clsx'
 import styles from './index.module.scss'
 
@@ -27,10 +27,22 @@ const _TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onKeyDown,
       onSelect,
       onInput,
+      onFocus,
+      onBlur,
     }: TextInputProps,
     ref,
   ) => {
     const [focus, setFocus] = useState(false)
+
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      setFocus(true)
+      onFocus?.(e)
+    }
+
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      setFocus(false)
+      onBlur?.(e)
+    }
 
     const styleWrapper = () => {
       const styleArray = [styles['text-input']]
@@ -54,8 +66,8 @@ const _TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           placeholder={placeholder}
           type={type}
           disabled={disabled}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           onChange={onChange}
           onKeyDown={onKeyDown}
           onSelect={onSelect}
