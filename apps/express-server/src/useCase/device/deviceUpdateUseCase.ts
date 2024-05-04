@@ -12,10 +12,9 @@ class DeviceUpdateUseCase {
     this.repository = repository
   }
   updateDevice = async (id: string, name?: string, model?: string, description?: string) => {
-    const deviceId = new DeviceId(id)
-    const device = await this.repository.fetch(deviceId)
+    const device = await this.repository.fetch(new DeviceId(id))
     if (device instanceof NullDevice) {
-      // エラー処理を書く
+      // TODO: エラー処理を書く
       return
     }
 

@@ -39,7 +39,7 @@ export const fetchDeviceList: RequestHandler = async (request, response, next) =
 
 export const fetchDeviceDetail: RequestHandler = async (request, response, next) => {
   try {
-    if (!('id' in request.params)) {
+    if (request.params.id === undefined) {
       return response.status(400).send('Not include ID')
     }
 
@@ -57,10 +57,10 @@ export const fetchDeviceDetail: RequestHandler = async (request, response, next)
 }
 
 export const createDevice: RequestHandler = async (request, response, next) => {
-  if (!('name' in request.body)) {
+  if (request.body.name === undefined) {
     return response.status(400).send('Not include ID')
   }
-  if (!('model' in request.body)) {
+  if (request.body.model === undefined) {
     return response.status(400).send('Not include ID')
   }
   try {

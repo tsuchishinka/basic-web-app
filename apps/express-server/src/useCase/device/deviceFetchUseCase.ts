@@ -11,8 +11,7 @@ class DeviceFetchUseCase {
     this.repository = repository
   }
   fetchDetail = async (id: string): Promise<Device> => {
-    const deviceId = new DeviceId(id)
-    const device = await this.repository.fetch(deviceId)
+    const device = await this.repository.fetch(new DeviceId(id))
     if (device instanceof NullDevice) {
       throw new Error()
     }
