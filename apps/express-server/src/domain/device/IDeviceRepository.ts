@@ -1,9 +1,8 @@
+import Device from './entity/device'
+import DeviceId from './value/deviceId'
+import DeviceName from './value/deviceName'
+import ModelName from './value/modelName'
 import DeviceGroupId from '@/domain/deviceGroup/value/deviceGroupId'
-import Device from '../entity/device'
-import DeviceId from '../value/deviceId'
-import DeviceName from '../value/deviceName'
-import ModelName from '../value/modelName'
-import NullDevice from '../entity/noDevice'
 
 export interface IDeviceRepository {
   update: (device: Device) => void
@@ -23,6 +22,6 @@ export interface IDeviceRepository {
     pageCount: number
     list: Device[]
   }>
-  fetch: (deviceId: DeviceId) => Promise<Device | NullDevice>
+  fetch: (deviceId: DeviceId) => Promise<Device | undefined>
   delete: (devices: Device[]) => void
 }

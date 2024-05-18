@@ -4,46 +4,27 @@ import {
   deviceRegisterUseCase,
   deviceDeleteUseCase,
   deviceUpdateUseCase,
-} from '@/useCase'
+} from '@/useCase/device'
 
-export const fetchDeviceList: RequestHandler = async (request, response, next) => {
+export const fetchDevices: RequestHandler = async (request, response, next) => {
   try {
-    const offset = request.body.offset ?? 0
-    const limit = request.body.limit ?? 20
-    const params: { name?: string; model?: string } = {}
-    if ('name' in request.body) {
-      params.name = request.body.name
-    }
-    if ('model' in request.body) {
-      params.model = request.body.model
-    }
+    const { offset, limit, name, model } = request.body
+    const params = { name, model }
+    const responseUseCase = await deviceFetchUseCase.fetchDevices(offset, limit, params)
 
-    const deviceListResponse = await deviceFetchUseCase.fetchList(offset, limit, params)
-
-    response.json({
-      offset: deviceListResponse.offset,
-      total: deviceListResponse.total,
-      list: deviceListResponse.list.map((item) => {
-        return {
-          deviceId: item.id.value,
-          name: item.name.value,
-          model: item.modelName.value,
-        }
-      }),
-      count: deviceListResponse.pageCount,
-    })
+    response.json(responseUseCase)
   } catch (e) {
     next(e)
   }
 }
 
-export const fetchDeviceDetail: RequestHandler = async (request, response, next) => {
+export const fetchDevice: RequestHandler = async (request, response, next) => {
   try {
     if (request.params.id === undefined) {
       return response.status(400).send('Not include ID')
     }
 
-    const device = await deviceFetchUseCase.fetchDetail(request.params.id)
+    const device = await deviceFetchUseCase.fetchDevice(request.params.id)
 
     response.json({
       deviceId: device.id.value,
@@ -77,7 +58,7 @@ export const createDevice: RequestHandler = async (request, response, next) => {
 
 export const deleteDevice: RequestHandler = async (request, response, next) => {
   try {
-    await deviceDeleteUseCase.deleteAll(request.body.deviceIds)
+    await deviceDeleteUseCase.deleteDevices(request.body.deviceIds)
     response.status(200).send('delete successed')
   } catch (e) {
     response.status(500).send('delete failed')

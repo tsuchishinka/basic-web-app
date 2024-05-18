@@ -1,6 +1,4 @@
-import Device from '@/domain/device/entity/device'
-import NullDevice from '@/domain/device/entity/noDevice'
-import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
+import { IDeviceRepository } from '@/domain/device/IDeviceRepository'
 import DeviceDescription from '@/domain/device/value/description'
 import DeviceId from '@/domain/device/value/deviceId'
 import DeviceName from '@/domain/device/value/deviceName'
@@ -13,7 +11,7 @@ class DeviceUpdateUseCase {
   }
   updateDevice = async (id: string, name?: string, model?: string, description?: string) => {
     const device = await this.repository.fetch(new DeviceId(id))
-    if (device instanceof NullDevice) {
+    if (device === undefined) {
       // TODO: エラー処理を書く
       return
     }
