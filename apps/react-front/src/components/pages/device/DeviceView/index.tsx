@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect } from 'react'
 import { Button, TextInput, SimpleTable } from 'ui-library'
 import { useState } from 'react'
-import styles from './DeviceView.module.scss'
+import styles from './index.module.scss'
 import { Device } from '@/store/DevicePage/state'
 import { deviceService } from '@/service'
 
 const _DeviceView = () => {
   const [searchWords, setSearchWords] = useState('')
   const [list, setList] = useState<string[][]>([])
+
   useEffect(() => {
     ;(async () => {
       const deviceList = await deviceService.fetchDeviceList({ offset: 0, limit: 10 })

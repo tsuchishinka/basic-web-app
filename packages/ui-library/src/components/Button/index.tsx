@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import styles from './Button.module.scss'
+import styles from './index.module.scss'
 
 export type ButtonProps = {
   /**
