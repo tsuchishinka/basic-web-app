@@ -1,5 +1,3 @@
-import { Request } from 'express'
-
 type RequestFetchDevices = {
   offset?: number
   limit?: number

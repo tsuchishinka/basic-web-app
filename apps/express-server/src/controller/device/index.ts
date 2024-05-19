@@ -1,11 +1,11 @@
 import { RequestHandler } from 'express'
+import { RequestFetchDevices } from './index.type'
 import {
   deviceFetchUseCase,
   deviceRegisterUseCase,
   deviceDeleteUseCase,
   deviceUpdateUseCase,
 } from '@/useCase/device'
-import { RequestFetchDevices } from './index.type'
 
 export const fetchDevices: RequestHandler = async (request, response, next) => {
   try {
