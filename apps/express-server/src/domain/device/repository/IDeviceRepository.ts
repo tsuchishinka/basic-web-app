@@ -1,9 +1,9 @@
-import DeviceGroupId from '@/domain/deviceGroup/value/deviceGroupId'
 import Device from '../entity/device'
+import NullDevice from '../entity/noDevice'
 import DeviceId from '../value/deviceId'
 import DeviceName from '../value/deviceName'
 import ModelName from '../value/modelName'
-import NullDevice from '../entity/noDevice'
+import DeviceGroupId from '@/domain/deviceGroup/value/deviceGroupId'
 
 export interface IDeviceRepository {
   update: (device: Device) => void

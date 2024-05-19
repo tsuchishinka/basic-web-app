@@ -1,8 +1,8 @@
-import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
 import IDeviceFactory from '@/domain/device/factory/IDeviceFactory'
+import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
+import DeviceDescription from '@/domain/device/value/description'
 import DeviceName from '@/domain/device/value/deviceName'
 import ModelName from '@/domain/device/value/modelName'
-import DeviceDescription from '@/domain/device/value/description'
 
 class DeviceRegisterUseCase {
   private repository: IDeviceRepository

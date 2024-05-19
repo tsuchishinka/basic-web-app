@@ -1,4 +1,3 @@
-import Device from '@/domain/device/entity/device'
 import NullDevice from '@/domain/device/entity/noDevice'
 import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
 import DeviceDescription from '@/domain/device/value/description'

@@ -1,9 +1,9 @@
-import DeviceName from '@/domain/device/value/deviceName'
-import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
 import DeviceId from '../../domain/device/value/deviceId'
-import ModelName from '@/domain/device/value/modelName'
 import Device from '@/domain/device/entity/device'
 import NullDevice from '@/domain/device/entity/noDevice'
+import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
+import DeviceName from '@/domain/device/value/deviceName'
+import ModelName from '@/domain/device/value/modelName'
 
 class DeviceFetchUseCase {
   private repository: IDeviceRepository

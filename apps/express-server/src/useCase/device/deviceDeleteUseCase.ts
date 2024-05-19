@@ -1,6 +1,6 @@
+import Device from '@/domain/device/entity/device'
 import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
 import DeviceId from '@/domain/device/value/deviceId'
-import Device from '@/domain/device/entity/device'
 
 class DeviceDeleteUseCase {
   private repository: IDeviceRepository

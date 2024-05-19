@@ -1,9 +1,9 @@
-import DeviceFetchUseCase from './device/deviceFetchUseCase'
 import DeviceDeleteUseCase from './device/deviceDeleteUseCase'
-import MongoDeviceRepositories from '@/domain/device/repository/mongoDeviceRepository'
+import DeviceFetchUseCase from './device/deviceFetchUseCase'
 import DeviceRegisterUseCase from './device/deviceRegisterUseCase'
-import MongoDeviceFactory from '@/domain/device/factory/mongoDeviceFactory'
 import DeviceUpdateUseCase from './device/deviceUpdateUseCase'
+import MongoDeviceFactory from '@/domain/device/factory/mongoDeviceFactory'
+import MongoDeviceRepositories from '@/domain/device/repository/mongoDeviceRepository'
 
 const deviceFetchUseCase = new DeviceFetchUseCase(new MongoDeviceRepositories())
 const deviceDeleteUseCase = new DeviceDeleteUseCase(new MongoDeviceRepositories())

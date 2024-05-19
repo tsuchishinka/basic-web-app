@@ -1,11 +1,10 @@
+import * as uuid from 'uuid'
 import Device from '../entity/device'
 import DeviceDescription from '../value/description'
 import DeviceId from '../value/deviceId'
 import DeviceName from '../value/deviceName'
 import ModelName from '../value/modelName'
 import IDeviceFactory from './IDeviceFactory'
-import * as uuid from 'uuid'
-import { UUID } from 'crypto'
 
 class MongoDeviceFactory implements IDeviceFactory {
   constructor() {}

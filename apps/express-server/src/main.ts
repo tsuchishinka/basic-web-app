@@ -1,7 +1,7 @@
+import cors from 'cors'
 import env from 'dotenv'
 import express from 'express'
 import appRoute from './router/index'
-import cors from 'cors'
 
 env.config()
 const port = process.env.PORT || 8000
