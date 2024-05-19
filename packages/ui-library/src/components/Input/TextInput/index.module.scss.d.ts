@@ -1,5 +1,7 @@
 export type Styles = {
   disabled: string
+  error: string
+  focus: string
   'text-input': string
 }
 
