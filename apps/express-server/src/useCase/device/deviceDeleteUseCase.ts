@@ -1,5 +1,5 @@
 import Device from '@/domain/device/entity/device'
-import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
+import { IDeviceRepository } from '@/domain/device/IDeviceRepository'
 import DeviceId from '@/domain/device/value/deviceId'
 
 class DeviceDeleteUseCase {
@@ -7,17 +7,11 @@ class DeviceDeleteUseCase {
   constructor(repository: IDeviceRepository) {
     this.repository = repository
   }
-  deleteAll = async (ids: string[]) => {
+  deleteDevices = async (ids: string[]) => {
     const deviceList = ids.map((id) => {
-      const deviceId = new DeviceId(id)
-      return new Device(deviceId)
+      return new Device(new DeviceId(id))
     })
-    try {
-      await this.repository.delete(deviceList)
-      return true
-    } catch (e) {
-      return false
-    }
+    await this.repository.deleteDevices(deviceList)
   }
 }
 

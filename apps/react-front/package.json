@@ -13,8 +13,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@packages/ui-library": "*",
     "react": "^18.2.0",
-    "ui-library": "*",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

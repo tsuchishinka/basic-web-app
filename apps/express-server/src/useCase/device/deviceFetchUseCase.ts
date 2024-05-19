@@ -1,7 +1,8 @@
 import DeviceId from '../../domain/device/value/deviceId'
+import COMMON_CONST from '@/common/const'
+import { ResponseFetchDevices } from '@/controller/device/index.type'
 import Device from '@/domain/device/entity/device'
-import NullDevice from '@/domain/device/entity/noDevice'
-import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
+import { IDeviceRepository } from '@/domain/device/IDeviceRepository'
 import DeviceName from '@/domain/device/value/deviceName'
 import ModelName from '@/domain/device/value/modelName'
 
@@ -10,26 +11,53 @@ class DeviceFetchUseCase {
   constructor(repository: IDeviceRepository) {
     this.repository = repository
   }
-  fetchDetail = async (id: string): Promise<Device> => {
-    const deviceId = new DeviceId(id)
-    const device = await this.repository.fetch(deviceId)
-    if (device instanceof NullDevice) {
+
+  fetchDevice = async (id: string): Promise<Device> => {
+    const device = await this.repository.fetchDevice(new DeviceId(id))
+    if (device === undefined) {
       throw new Error()
     }
     return device
   }
-  fetchList = async (
-    offset: number,
-    limit: number,
+
+  fetchDevices = async (
+    offset: number | undefined,
+    limit: number | undefined,
     searchParams?: { name?: string; model?: string; parentDeviceGroupId?: string },
-  ) => {
+  ): Promise<ResponseFetchDevices> => {
+    const complementedOffset = offset ?? 0
+    const complementedLimit = limit ?? COMMON_CONST.REQUEST_LIMIT_SIZE
     const deviceName = searchParams?.name ? new DeviceName(searchParams.name) : undefined
     const modelName = searchParams?.model ? new ModelName(searchParams.model) : undefined
     const params = {
       deviceName,
       modelName,
     }
-    return await this.repository.fetchList(offset, limit, params)
+
+    const {
+      total,
+      pageCount,
+      list,
+      offset: newOffset,
+    } = await this.repository.fetchDevices(complementedOffset, complementedLimit, params)
+    const responsedList =
+      list.length > 0
+        ? list.map((device) => {
+            return {
+              id: device!.id.value,
+              name: device!.name.value,
+              modelName: device!.modelName.value,
+              description: device!.description.value,
+            }
+          })
+        : []
+
+    return {
+      offset: newOffset,
+      total,
+      count: pageCount,
+      list: responsedList,
+    }
   }
 }
 

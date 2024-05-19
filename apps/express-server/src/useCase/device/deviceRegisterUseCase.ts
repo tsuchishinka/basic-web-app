@@ -1,8 +1,5 @@
 import IDeviceFactory from '@/domain/device/factory/IDeviceFactory'
-import { IDeviceRepository } from '@/domain/device/repository/IDeviceRepository'
-import DeviceDescription from '@/domain/device/value/description'
-import DeviceName from '@/domain/device/value/deviceName'
-import ModelName from '@/domain/device/value/modelName'
+import { IDeviceRepository } from '@/domain/device/IDeviceRepository'
 
 class DeviceRegisterUseCase {
   private repository: IDeviceRepository
@@ -13,11 +10,8 @@ class DeviceRegisterUseCase {
   }
 
   registerDevice = async (name: string, modelName: string, description?: string) => {
-    const deviceName = new DeviceName(name)
-    const deviceModelName = new ModelName(modelName)
-    const deviceDescription = new DeviceDescription(description ?? '')
-    const device = this.factory.createDevice(deviceName, deviceModelName, deviceDescription)
-    await this.repository.create(device)
+    const device = this.factory.createDevice(name, modelName, description)
+    await this.repository.registerDevice(device)
   }
 }
 
