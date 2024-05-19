@@ -1,9 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDotEnv": [".env"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
+      "env": [
+        "MONGO_URI",
+        "DB_NAME",
+        "DEVICE_COLLECTION_NAME",
+        "SECRET_KEY",
+        "USER_COLLECTION_NAME"
+      ],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {

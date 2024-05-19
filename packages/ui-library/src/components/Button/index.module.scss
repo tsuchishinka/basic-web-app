@@ -1,5 +1,5 @@
-@use 'src/utils/common.scss';
-@use 'src/utils/color_base';
+@use '../../utils/common.scss';
+@use '../../utils/color_base';
 .button {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
@@ -28,7 +28,6 @@
   color: white;
   background-color: var(--color-destructive-600);
 }
-
 
 .button-primary-green {
   color: white;

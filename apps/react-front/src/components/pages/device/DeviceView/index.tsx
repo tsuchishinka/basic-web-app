@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import { Button, TextInput, SimpleTable } from 'ui-library'
+import { Button, TextInput, SimpleTable } from '@packages/ui-library'
 import { useState } from 'react'
 import styles from './index.module.scss'
 import { Device } from '@/store/DevicePage/state'

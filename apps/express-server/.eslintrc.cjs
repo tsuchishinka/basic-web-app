@@ -1,7 +1,6 @@
 module.exports = {
-  extends: ['@repo/eslint-config/library.cjs'],
-  parser: '@typescript-eslint/parser',
+  extends: ['@packages/eslint-config'],
   parserOptions: {
-    exclude: ['node_modules', 'dist'],
+    sourceType: 'modules',
   },
 }
