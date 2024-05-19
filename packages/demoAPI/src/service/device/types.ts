@@ -6,6 +6,7 @@ type ListResponse<T> = {
 };
 
 type RequestFetchDevice = {
+  model?: string;
   name?: string;
   offset?: number;
   limit?: number;

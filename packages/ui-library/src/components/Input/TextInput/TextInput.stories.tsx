@@ -17,5 +17,4 @@ export const All = ({ ...args }: TextInputProps) => {
 
 const componentStyle: React.CSSProperties = {
   padding: 20,
-  display: 'flex',
 }
