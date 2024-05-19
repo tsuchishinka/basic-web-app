@@ -7,7 +7,6 @@ export type SimpleTableProps = {
 }
 
 const _SimpleTable = ({ list, headerList }: SimpleTableProps) => {
-  console.log(`list: ${JSON.stringify(list)}`)
   return (
     <>
       <table className={styles.table}>
