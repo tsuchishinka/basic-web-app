@@ -1,16 +1,11 @@
 import express from 'express'
-import {
-  fetchDeviceList,
-  createDevice,
-  deleteDevice,
-  fetchDeviceDetail,
-} from '../controller/device'
+import { fetchDevices, createDevice, deleteDevice, fetchDevice } from '../controller/device'
 
 const router = express.Router()
 
-router.get('/', fetchDeviceList)
+router.get('/', fetchDevices)
 
-router.get('/:id', fetchDeviceDetail)
+router.get('/:id', fetchDevice)
 
 router.post('/', createDevice)
 

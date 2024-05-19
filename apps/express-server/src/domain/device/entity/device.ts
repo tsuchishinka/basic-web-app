@@ -1,7 +1,7 @@
+import DeviceDescription from '../value/description'
 import DeviceId from '../value/deviceId'
 import DeviceName from '../value/deviceName'
 import ModelName from '../value/modelName'
-import DeviceDescription from '../value/description'
 
 class Device {
   private _id: DeviceId

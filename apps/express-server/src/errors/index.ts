@@ -1,3 +1,5 @@
-export class MissingRequiredProperty extends Error {}
+class MissingRequiredProperty extends Error {}
 
-export class NotMatchDataType extends Error {}
+class NotMatchDataType extends Error {}
+
+export { MissingRequiredProperty, NotMatchDataType }
