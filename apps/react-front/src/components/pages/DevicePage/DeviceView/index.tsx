@@ -22,8 +22,8 @@ const _DeviceView = () => {
     dispatch(searchDevices({ name: searchWords }))
   }, [dispatch, searchWords])
 
-  const onChange = useCallback((val: string) => {
-    setSearchWords(val)
+  const onChange = useCallback((e: any) => {
+    setSearchWords(e.target.value)
   }, [])
 
   const tableList = state.devices.map((device) => {

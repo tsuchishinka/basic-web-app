@@ -11,7 +11,7 @@ type ResponseFetchDevices = {
   list: {
     id: string
     name: string
-    modelName: string
+    model: string
     description: string | undefined
   }[]
   count: number

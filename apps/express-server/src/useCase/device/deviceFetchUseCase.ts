@@ -46,7 +46,7 @@ class DeviceFetchUseCase {
             return {
               id: device!.id.value,
               name: device!.name.value,
-              modelName: device!.modelName.value,
+              model: device!.modelName.value,
               description: device!.description.value,
             }
           })

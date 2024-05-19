@@ -14,11 +14,12 @@ import {
 
 interface Props {
   value?: DateTimeValues
+  placeholder?: string
   format?: string
   onChange: (value: DateTimeValues) => void
 }
 
-const _DateTimeTextInput = ({ value, format = 'YYYY-MM-DD', onChange }: Props) => {
+const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChange }: Props) => {
   const [textHighlightTrigger, setTextHighlightTrigger] = useState(false)
   const [dateTimeValue, setDateTimeValue] = useState<DateTimeValues | undefined>(value)
   const [activeDateTimeKey, setActiveDateTimeKey] = useState<{
@@ -161,6 +162,7 @@ const _DateTimeTextInput = ({ value, format = 'YYYY-MM-DD', onChange }: Props) =
     <TextInput
       ref={inputRef}
       value={getDateTimeText(dateTimeValue, format)}
+      placeholder={placeholder}
       onSelect={handleSelect}
       onInput={handleInput}
       onKeyDown={handleKeyDown}
