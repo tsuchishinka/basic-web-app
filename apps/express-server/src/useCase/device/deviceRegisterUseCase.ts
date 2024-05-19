@@ -11,7 +11,7 @@ class DeviceRegisterUseCase {
 
   registerDevice = async (name: string, modelName: string, description?: string) => {
     const device = this.factory.createDevice(name, modelName, description)
-    await this.repository.create(device)
+    await this.repository.registerDevice(device)
   }
 }
 

@@ -4,7 +4,7 @@ import { userFetchUseCase, userRegisterUseCase } from '@/useCase/user'
 
 const fetchUsers = async (req: Request, res: Response) => {
   try {
-    const { offset, limit, name }: RequestFetchUsers = req.body
+    const { offset, limit, name }: RequestFetchUsers = req.query
     const searchParams = { name }
     const response = await userFetchUseCase.fetchUsers(offset, limit, searchParams)
     res.json(response)

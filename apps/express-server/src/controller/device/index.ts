@@ -5,12 +5,17 @@ import {
   deviceDeleteUseCase,
   deviceUpdateUseCase,
 } from '@/useCase/device'
+import { RequestFetchDevices } from './index.type'
 
 export const fetchDevices: RequestHandler = async (request, response, next) => {
   try {
-    const { offset, limit, name, model } = request.body
+    const { offset, limit, name, model }: RequestFetchDevices = request.query
     const params = { name, model }
-    const responseUseCase = await deviceFetchUseCase.fetchDevices(offset, limit, params)
+    const responseUseCase = await deviceFetchUseCase.fetchDevices(
+      Number(offset),
+      Number(limit),
+      params,
+    )
 
     response.json(responseUseCase)
   } catch (e) {

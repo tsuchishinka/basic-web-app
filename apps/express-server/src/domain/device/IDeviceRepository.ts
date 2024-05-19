@@ -1,20 +1,18 @@
 import Device from './entity/device'
 import DeviceId from './value/deviceId'
+import DeviceGroupId from '@/domain/deviceGroup/value/deviceGroupId'
 import DeviceName from './value/deviceName'
 import ModelName from './value/modelName'
-import DeviceGroupId from '@/domain/deviceGroup/value/deviceGroupId'
 
 export interface IDeviceRepository {
-  update: (device: Device) => void
-  create: (device: Device) => void
-  fetchList: (
+  updateDevice: (device: Device) => void
+  registerDevice: (device: Device) => void
+  fetchDevices: (
     offset: number,
     limit: number,
     params?: {
-      deviceId?: DeviceId
       deviceName?: DeviceName
       modelName?: ModelName
-      parentDeviceGroupId?: DeviceGroupId
     },
   ) => Promise<{
     offset: number
@@ -22,6 +20,6 @@ export interface IDeviceRepository {
     pageCount: number
     list: Device[]
   }>
-  fetch: (deviceId: DeviceId) => Promise<Device | undefined>
-  delete: (devices: Device[]) => void
+  fetchDevice: (deviceId: DeviceId) => Promise<Device | undefined>
+  deleteDevices: (devices: Device[]) => void
 }

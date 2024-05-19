@@ -5,12 +5,17 @@ import Password from '@/domain/user/value/password'
 import UserName from '@/domain/user/value/userName'
 
 const toUserCollectionSearchParams = (params?: { userName?: UserName }) => {
-  if (params === undefined || Object.entries(params).every(([, value]) => value === undefined)) {
-    return undefined
-  }
-  return {
-    name: params?.userName?.value,
-  }
+  let collectionParams = {}
+  Object.entries({ ...params }).every(([key, value]) => {
+    if (value?.value === undefined || value.value.length === 0) {
+      return
+    }
+    const regexValue = new RegExp(value.value)
+    if (key === 'userName') {
+      collectionParams = { ...collectionParams, name: regexValue }
+    }
+  })
+  return collectionParams
 }
 
 const toUser = (collectionData: WithId<UserCollectionFields> | null): User | undefined => {

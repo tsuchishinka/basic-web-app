@@ -1,8 +1,10 @@
+import { Request } from 'express'
+
 type RequestFetchDevices = {
   offset?: number
   limit?: number
   name?: string
-  modelName?: string
+  model?: string
 }
 
 type ResponseFetchDevices = {

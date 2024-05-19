@@ -10,7 +10,7 @@ class DeviceUpdateUseCase {
     this.repository = repository
   }
   updateDevice = async (id: string, name?: string, model?: string, description?: string) => {
-    const device = await this.repository.fetch(new DeviceId(id))
+    const device = await this.repository.fetchDevice(new DeviceId(id))
     if (device === undefined) {
       // TODO: エラー処理を書く
       return
@@ -25,7 +25,7 @@ class DeviceUpdateUseCase {
     if (description) {
       device.changeDescription(new DeviceDescription(description))
     }
-    return this.repository.update(device)
+    return this.repository.updateDevice(device)
   }
 }
 

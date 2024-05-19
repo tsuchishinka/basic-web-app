@@ -13,7 +13,7 @@ class DeviceFetchUseCase {
   }
 
   fetchDevice = async (id: string): Promise<Device> => {
-    const device = await this.repository.fetch(new DeviceId(id))
+    const device = await this.repository.fetchDevice(new DeviceId(id))
     if (device === undefined) {
       throw new Error()
     }
@@ -39,7 +39,7 @@ class DeviceFetchUseCase {
       pageCount,
       list,
       offset: newOffset,
-    } = await this.repository.fetchList(complementedOffset, complementedLimit, params)
+    } = await this.repository.fetchDevices(complementedOffset, complementedLimit, params)
     const responsedList =
       list.length > 0
         ? list.map((device) => {

@@ -7,23 +7,21 @@ import ModelName from '../../domain/device/value/modelName'
 import { DeviceCollectionFields } from './DeviceCollectionFields'
 import DeviceId from '@/domain/device/value/deviceId'
 
-const getCollectionSearchParams = (params?: {
-  deviceId?: DeviceId
-  deviceName?: DeviceName
-  modelName?: ModelName
-}) => {
-  const tempParams = { ...params }
-  const noContent = Object.values(tempParams).every((value) => {
-    return value === undefined || value === null
+const getCollectionSearchParams = (params?: { deviceName?: DeviceName; modelName?: ModelName }) => {
+  let collectionParams = {}
+  Object.entries({ ...params }).every(([key, value]) => {
+    if (value?.value === undefined || value.value.length === 0) {
+      return
+    }
+    const regexValue = new RegExp(value.value)
+    if (key === 'deviceName') {
+      collectionParams = { ...collectionParams, name: regexValue }
+    }
+    if (key === 'modelName') {
+      collectionParams = { ...collectionParams, model: regexValue }
+    }
   })
-  if (!params || noContent || Object.keys(params).length === 0) {
-    return undefined
-  }
-  return {
-    _id: new ObjectId(params.deviceId?.value ?? ''),
-    name: params.deviceName?.value,
-    model: params.modelName?.value,
-  }
+  return collectionParams
 }
 
 const toDevice = (collectionData: WithId<DeviceCollectionFields> | null): Device | undefined => {

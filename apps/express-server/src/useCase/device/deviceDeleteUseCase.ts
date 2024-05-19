@@ -11,7 +11,7 @@ class DeviceDeleteUseCase {
     const deviceList = ids.map((id) => {
       return new Device(new DeviceId(id))
     })
-    await this.repository.delete(deviceList)
+    await this.repository.deleteDevices(deviceList)
   }
 }
 

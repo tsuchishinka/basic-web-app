@@ -3,12 +3,11 @@ import { WithId } from 'mongodb'
 import Device from '../../domain/device/entity/device'
 import { IDeviceRepository } from '../../domain/device/IDeviceRepository'
 import DeviceId from '../../domain/device/value/deviceId'
-import DeviceName from '../../domain/device/value/deviceName'
-import ModelName from '../../domain/device/value/modelName'
+import DeviceName from '@/domain/device/value/deviceName'
+import ModelName from '@/domain/device/value/modelName'
 import { getCollectionSearchParams, toCollectionData, toDevice } from './dateTransform'
 import { DeviceCollectionFields } from './DeviceCollectionFields'
 import { mongoClient } from '@/common/db/mongoClient'
-import DeviceGroupId from '@/domain/deviceGroup/value/deviceGroupId'
 
 const DB_NAME = 'tsuchidaDB'
 const DEVICE_COLLECTION_NAME = 'device'
@@ -18,14 +17,12 @@ class MongoDeviceRepositories implements IDeviceRepository {
     return await mongoClient.getCollection(DB_NAME, DEVICE_COLLECTION_NAME)
   }
 
-  fetchList = async (
+  fetchDevices = async (
     offset: number,
     limit: number,
     params?: {
-      deviceId?: DeviceId
       deviceName?: DeviceName
       modelName?: ModelName
-      parentDeviceGroupId?: DeviceGroupId
     },
   ): Promise<{
     offset: number
@@ -35,7 +32,6 @@ class MongoDeviceRepositories implements IDeviceRepository {
   }> => {
     const collection = await this.getCollection()
     const collectionSearchParams = getCollectionSearchParams(params)
-
     const total = await collection.countDocuments(collectionSearchParams)
     let list = []
     if (collectionSearchParams) {
@@ -60,7 +56,7 @@ class MongoDeviceRepositories implements IDeviceRepository {
     }
   }
 
-  fetch = async (deviceId: DeviceId) => {
+  fetchDevice = async (deviceId: DeviceId) => {
     const collection = await this.getCollection()
     const deviceCollectionItem = await collection.findOne<WithId<DeviceCollectionFields>>({
       _id: new ObjectId(deviceId.value),
@@ -68,7 +64,7 @@ class MongoDeviceRepositories implements IDeviceRepository {
     return toDevice(deviceCollectionItem)
   }
 
-  create = async (device: Device) => {
+  registerDevice = async (device: Device) => {
     const collection = await this.getCollection()
     const collectionData = toCollectionData(device)
     try {
@@ -77,7 +73,7 @@ class MongoDeviceRepositories implements IDeviceRepository {
     } catch (e) {}
   }
 
-  update = async (device: Device) => {
+  updateDevice = async (device: Device) => {
     const collection = await this.getCollection()
     const collectionData = toCollectionData(device)
     try {
@@ -95,7 +91,7 @@ class MongoDeviceRepositories implements IDeviceRepository {
     }
   }
 
-  delete = async (devices: Device[]) => {
+  deleteDevices = async (devices: Device[]) => {
     const collection = await this.getCollection()
     await Promise.all(
       devices.map(async (device) => {
