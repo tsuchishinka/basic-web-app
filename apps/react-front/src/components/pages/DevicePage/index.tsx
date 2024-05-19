@@ -1,4 +1,4 @@
-import { DeviceView } from './DeviceView/DeviceView'
+import { DeviceView } from './DeviceView'
 
 export const DevicePage = () => {
   return (
