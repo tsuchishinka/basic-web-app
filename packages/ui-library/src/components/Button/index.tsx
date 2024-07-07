@@ -17,7 +17,7 @@ export type ButtonProps = {
   /**
    * Button contents
    */
-  label: string
+  children: string
   /**
    * Optional click handler
    */
@@ -31,7 +31,7 @@ export const Button = ({
   variant = 'secondary',
   size = 'medium',
   color = 'blue',
-  label,
+  children,
   onClick = () => {},
 }: ButtonProps) => {
   return (
@@ -45,7 +45,7 @@ export const Button = ({
       ])}
       onClick={() => onClick()}
     >
-      {label}
+      {children}
     </button>
   )
 }

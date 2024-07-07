@@ -4,6 +4,7 @@ export type Styles = {
   "error-message-left": string;
   "input-wrapper-left": string;
   "input-wrapper-top": string;
+  label: string;
   "label-left": string;
 };
 

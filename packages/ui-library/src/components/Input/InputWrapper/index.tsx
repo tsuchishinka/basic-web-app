@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react'
+import { CSSProperties, ReactNode, useState } from 'react'
 import styles from './index.module.scss'
 import clsx from 'clsx'
 
@@ -17,6 +17,7 @@ const InputWrapper = ({
   labelWidth,
   label,
 }: Props) => {
+  const [] = useState('')
   const inputWrapperStyle = () => {
     const style: CSSProperties = {}
     if (labelPosition === 'left') {
@@ -26,7 +27,9 @@ const InputWrapper = ({
   }
   return (
     <div className={clsx(styles[`input-wrapper-${labelPosition}`])} style={inputWrapperStyle()}>
-      <label className={clsx(labelPosition === 'left' && styles['label-left'])}>{label}</label>
+      <label className={clsx(labelPosition === 'left' && styles['label-left'], styles.label)}>
+        {label}
+      </label>
       <div className={clsx(labelPosition === 'left' && styles['children-left'])}>{children}</div>
       <div
         className={clsx(

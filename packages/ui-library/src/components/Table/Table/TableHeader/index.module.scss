@@ -1,0 +1,25 @@
+.table-header {
+  tr {
+    th {
+      &:first-child {
+        border-left: none;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+    &:first-child {
+      th {
+        &:first-child {
+          border-top-left-radius: 0.8rem;
+        }
+
+        &:last-child {
+          border-top-right-radius: 0.8rem;
+          border-right: none;
+        }
+      }
+    }
+  }
+}

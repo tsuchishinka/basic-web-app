@@ -36,7 +36,9 @@ const _DeviceView = () => {
         <div style={{ width: '30rem' }}>
           <TextInput value={searchWords} onChange={onChange} />
         </div>
-        <Button label='検索' color='blue' variant='secondary' size='medium' onClick={onClick} />
+        <Button color='blue' variant='secondary' size='medium' onClick={onClick}>
+          検索
+        </Button>
       </div>
       <div className={styles.list}>
         <SimpleTable headerList={['モデル', '名前']} list={tableList} />

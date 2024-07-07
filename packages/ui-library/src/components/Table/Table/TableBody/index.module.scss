@@ -1,0 +1,24 @@
+.table-body {
+  overflow: auto;
+  tr {
+    td {
+      &:first-child {
+        border-left: none;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+    &:last-child {
+      td {
+        border-bottom: none;
+        &:first-child {
+          border-bottom-left-radius: 0.8rem;
+        }
+        &:last-child {
+          border-bottom-right-radius: 0.8rem;
+        }
+      }
+    }
+  }
+}
