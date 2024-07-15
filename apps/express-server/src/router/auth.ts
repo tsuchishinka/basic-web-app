@@ -5,6 +5,4 @@ const authRouter = express.Router()
 
 authRouter.post('/', login)
 
-authRouter.use(checkSession)
-
 export default authRouter
