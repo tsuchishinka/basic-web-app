@@ -36,7 +36,7 @@ const convertResponseCase = (data: any) => {
 
 const convertObjectProperty = (
   data: AnyObject | Primitives | Array<AnyObject | Primitives>,
-  convertFunction: (str: string) => string
+  convertFunction: (str: string) => string,
   //eslint-disable-next-line
 ): any => {
   if (data === null || typeof data !== "object") {
@@ -57,12 +57,12 @@ const convertObjectProperty = (
     if (Object.prototype.toString.call(data[key]) === "[object Object]") {
       newObject[convertFunction(key)] = convertObjectProperty(
         data[key],
-        convertFunction
+        convertFunction,
       );
     } else {
       newObject[convertFunction(key)] = convertObjectProperty(
         data[key],
-        convertFunction
+        convertFunction,
       );
     }
   }

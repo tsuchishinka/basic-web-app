@@ -1,6 +1,5 @@
 import Device from './entity/device'
 import DeviceId from './value/deviceId'
-import DeviceGroupId from '@/domain/deviceGroup/value/deviceGroupId'
 import DeviceName from './value/deviceName'
 import ModelName from './value/modelName'
 

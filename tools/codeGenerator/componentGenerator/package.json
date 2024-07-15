@@ -1,0 +1,16 @@
+{
+  "name": "component-generator",
+  "packageManager": "yarn@3.7.0",
+  "main": "src/index.js",
+  "scripts": {
+    "generate": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.3.14",
+    "papaparse": "^5.4.1",
+    "tsx": "^4.14.0"
+  }
+}

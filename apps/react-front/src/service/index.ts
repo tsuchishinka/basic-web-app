@@ -1,9 +1,11 @@
-import { DeviceService } from '@/lib/service/device/DeviceService'
-import { AxiosRequestClient } from '@/lib/client/AxiosRequestClient'
+import { AxiosRequestClient, DeviceService, LoginService } from '@packages/demo-api'
 
 const axiosClient = new AxiosRequestClient({
   contentType: 'application/json',
-  axiosConfig: { baseURL: 'http://localhost:8000' },
+  axiosConfig: { baseURL: 'http://localhost:8000', withCredentials: true },
 })
 
-export const deviceService = new DeviceService(axiosClient)
+const deviceService = new DeviceService(axiosClient)
+const loginService = new LoginService(axiosClient)
+
+export { deviceService, loginService }

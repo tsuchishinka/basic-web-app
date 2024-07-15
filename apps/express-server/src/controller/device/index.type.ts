@@ -1,5 +1,3 @@
-import { Request } from 'express'
-
 type RequestFetchDevices = {
   offset?: number
   limit?: number
@@ -13,7 +11,7 @@ type ResponseFetchDevices = {
   list: {
     id: string
     name: string
-    modelName: string
+    model: string
     description: string | undefined
   }[]
   count: number

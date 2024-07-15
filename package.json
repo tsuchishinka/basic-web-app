@@ -10,7 +10,9 @@
   "devDependencies": {
     "@packages/eslint-config": "*",
     "@packages/typescript-config": "*",
+    "@types/lodash.clonedeep": "^4.5.9",
     "@typescript-eslint/eslint-plugin": "latest",
+    "lodash.clonedeep": "^4.5.0",
     "prettier": "^3.1.0",
     "turbo": "latest"
   },
@@ -21,6 +23,7 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "packages/**/*"
+    "packages/**/*",
+    "tools/**/*"
   ]
 }

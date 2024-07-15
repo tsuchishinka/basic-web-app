@@ -11,7 +11,9 @@ const login = async (req: Request, res: Response) => {
     }
     await authUseCase.login(name, password, loginCallback)
 
-    res.status(200).send('success')
+    res.status(200).json({
+      message: 'success',
+    })
   } catch (e) {
     res.status(401).send('Authentificate failed')
   }
