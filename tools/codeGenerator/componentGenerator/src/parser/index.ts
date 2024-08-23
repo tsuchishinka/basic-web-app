@@ -1,13 +1,6 @@
 import papaparse, { ParseConfig, ParseStepResult } from "papaparse";
 import fs from "fs";
-import { HeaderIndex, ComponentData } from "./ComponentData";
-
-const getArrayData = <T>(array: T[], index: number) => {
-  if (index > array.length - 1) {
-    return undefined;
-  }
-  return array[index];
-};
+import { ComponentData } from "./ComponentData";
 
 const getInitialComponentData = (): ComponentData => {
   return {
@@ -20,9 +13,9 @@ const getInitialComponentData = (): ComponentData => {
   };
 };
 
-const parseCsv = async (filePath: string): Promise<ComponentData[]> => {
+const parse = async (filePath: string): Promise<ComponentData[]> => {
   return new Promise((resolve) => {
-    let headerIndex: HeaderIndex = {
+    const columnIndex = {
       name: 0,
       type: 0,
       description: 0,
@@ -37,7 +30,7 @@ const parseCsv = async (filePath: string): Promise<ComponentData[]> => {
       delimiter: ",",
       step(results: ParseStepResult<string[]>) {
         const { data: rowData } = results;
-        if (rowData.length > 0 && rowData[0] && rowData[0] !== "") {
+        if (rowData.length > 0 && rowData[0]) {
           isParsing = true;
           if (rowData[0].includes("#")) {
             rowData.forEach((data, index) => {
@@ -48,48 +41,79 @@ const parseCsv = async (filePath: string): Promise<ComponentData[]> => {
                 data === "default" ||
                 data === "required"
               ) {
-                headerIndex[data] = index;
+                columnIndex[data] = index;
               }
             });
             return;
           }
+          const name =
+            rowData.length > columnIndex.name ? rowData[columnIndex.name] : "";
+          const type =
+            rowData.length > columnIndex.type ? rowData[columnIndex.type] : "";
+          const description =
+            rowData.length > columnIndex.description
+              ? rowData[columnIndex.description]
+              : "";
+          const defaultData =
+            rowData.length > columnIndex.default
+              ? rowData[columnIndex.default]
+              : "";
+          const required =
+            rowData.length > columnIndex.required
+              ? rowData[columnIndex.required] === "TRUE"
+              : false;
+          if (name === undefined) {
+            return;
+          }
           switch (rowData[0]) {
             case "name":
-              componentData.name = getArrayData(rowData, headerIndex.name);
+              componentData.name = name;
+              break;
             case "props":
               componentData.props.push({
-                name: getArrayData(rowData, headerIndex.name),
-                type: getArrayData(rowData, headerIndex.type),
-                description: getArrayData(rowData, headerIndex.description),
-                default: getArrayData(rowData, headerIndex.default),
-                required:
-                  getArrayData(rowData, headerIndex.required) === "TRUE",
+                name,
+                type,
+                description,
+                default: defaultData,
+                required,
               });
+              break;
             case "state":
-              componentData.props.push({
-                name: getArrayData(rowData, headerIndex.name),
-                type: getArrayData(rowData, headerIndex.type),
-                description: getArrayData(rowData, headerIndex.description),
-                default: getArrayData(rowData, headerIndex.default),
+              componentData.state.push({
+                name,
+                type,
+                description,
+                default: defaultData,
               });
+              break;
             case "type":
               componentData.type.push({
-                name: getArrayData(rowData, headerIndex.name),
-                type: getArrayData(rowData, headerIndex.type),
-                description: getArrayData(rowData, headerIndex.description),
+                name,
+                type,
+                description,
               });
+              break;
             case "event":
+              const args = type?.split("=>")[0];
+              const returnTypeStr = type?.split("=>")[1]?.trim();
               componentData.event.push({
-                name: getArrayData(rowData, headerIndex.name),
-                type: getArrayData(rowData, headerIndex.type),
-                description: getArrayData(rowData, headerIndex.description),
+                name,
+                args: args
+                  ? args
+                      .match(/\([\s\S]*\)/g)
+                      ?.toString()
+                      .slice(1, -1)
+                  : undefined,
+                returnType: returnTypeStr,
+                description,
               });
               break;
             case "child":
-              componentData.child.push(getArrayData(rowData, headerIndex.name));
+              componentData.child.push(name);
               break;
           }
         } else if (isParsing) {
+          // コンポーネントの区切りで空行になった時
           isParsing = false;
           componentDataList.push(componentData);
           componentData = getInitialComponentData();
@@ -107,4 +131,4 @@ const parseCsv = async (filePath: string): Promise<ComponentData[]> => {
   });
 };
 
-export { parseCsv };
+export { parse };

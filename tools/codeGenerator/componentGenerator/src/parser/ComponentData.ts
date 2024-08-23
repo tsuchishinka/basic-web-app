@@ -1,37 +1,30 @@
-type HeaderIndex = {
-  name: number;
-  description: number;
-  type: number;
-  default: number;
-  required: number;
-};
-
 type ComponentData = {
-  name: string | undefined;
+  name: string;
   props: {
-    name: string | undefined;
+    name: string;
     type: string | undefined;
     description?: string;
     default?: string | undefined;
     required?: boolean;
   }[];
   state: {
-    name: string | undefined;
+    name: string;
     type: string | undefined;
     description?: string;
     default?: string | undefined;
   }[];
   event: {
-    name: string | undefined;
-    type: string | undefined;
+    name: string;
+    args: string | undefined;
+    returnType: string | undefined;
     description?: string;
   }[];
   type: {
-    name: string | undefined;
+    name: string;
     type: string | undefined;
     description?: string;
   }[];
   child: (string | undefined)[];
 };
 
-export type { HeaderIndex, ComponentData };
+export type { ComponentData };

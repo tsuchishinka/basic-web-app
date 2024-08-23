@@ -1,9 +1,9 @@
 export type Styles = {
-  "login-page": string;
-};
+  'login-page': string
+}
 
-export type ClassNames = keyof Styles;
+export type ClassNames = keyof Styles
 
-declare const styles: Styles;
+declare const styles: Styles
 
-export default styles;
+export default styles

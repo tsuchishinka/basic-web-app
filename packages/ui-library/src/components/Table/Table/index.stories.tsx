@@ -49,6 +49,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    collomnWidthList: ['5rem', '4rem'],
+    collomnWidthList: ['5rem', '6rem'],
   },
 }
