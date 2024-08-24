@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react'
-import styles from './index.module.scss'
 import { TableContext } from '../../..'
+import styles from './index.module.scss'
 
 interface Props {
   children: ReactNode

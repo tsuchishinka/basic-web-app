@@ -1,6 +1,6 @@
 import express from 'express'
-import { fetchUser, fetchUsers, registerUser } from '@/controller/user'
 import { checkSession } from '@/controller/auth'
+import { fetchUser, fetchUsers, registerUser } from '@/controller/user'
 
 const userRouter = express.Router()
 

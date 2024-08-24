@@ -10,8 +10,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const date = new Date()
-
 export const Default: Story = {
   args: {},
 }

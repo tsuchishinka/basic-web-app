@@ -22,7 +22,7 @@ const _DeviceView = () => {
     dispatch(searchDevices({ name: searchWords }))
   }, [dispatch, searchWords])
 
-  const onChange = useCallback((e: any) => {
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchWords(e.target.value)
   }, [])
 

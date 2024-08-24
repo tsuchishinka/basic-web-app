@@ -1,5 +1,6 @@
 import cloneDeep from "lodash.clonedeep";
 import { ComponentData } from "../parser/ComponentData";
+import { isEqualsGreaterThanToken } from "typescript";
 
 type ComponentTreeNode = ComponentData & {
   parent: string | undefined;
@@ -8,16 +9,17 @@ type ComponentTreeNode = ComponentData & {
 
 const appendParentAncestors = (
   componentTree: ComponentTreeNode[],
-  targetNodeName: string
+  targetNodeName: string,
 ): ComponentTreeNode[] => {
   const newComponentTree = cloneDeep(componentTree);
   const updatedNode = newComponentTree.find(
-    (node) => node.name === targetNodeName
+    (node) => node.name === targetNodeName,
   );
+
   if (updatedNode?.parent !== undefined) {
     const newParentNode = appendParentAncestors(
       newComponentTree,
-      updatedNode.parent
+      updatedNode.parent,
     ).find((item) => item.name === updatedNode.parent);
     if (newParentNode !== undefined) {
       updatedNode.ancestors = [
@@ -30,7 +32,7 @@ const appendParentAncestors = (
 };
 
 const appendAncestors = (
-  componentList: ComponentData[]
+  componentList: ComponentData[],
 ): (ComponentData & { ancestors: string[] })[] => {
   let componentTree: ComponentTreeNode[] = componentList.map((component) => {
     return {
@@ -62,7 +64,7 @@ const appendAncestors = (
         type,
         ancestors,
       };
-    }
+    },
   );
 };
 

@@ -1,9 +1,7 @@
 import { memo, useCallback, useEffect, useRef } from 'react'
-import { getDateTimeText, getNextActiveDateTimeKey, getNumberKey } from './dateTimeHelpers'
-import { TextInput } from '@/components/Input/TextInput'
 import { useState } from 'react'
 import { MouseEvent } from 'react'
-import { DateTimeKey, DateTimeValues } from './index.types'
+import { getDateTimeText, getNextActiveDateTimeKey, getNumberKey } from './dateTimeHelpers'
 import {
   getSelectionRange,
   sortedDateTimeKeyInfo,
@@ -11,6 +9,8 @@ import {
   updateDateTimeValue,
   isMoveNextFocusFromNewValue,
 } from './dateTimeHelpers'
+import { DateTimeKey, DateTimeValues } from './index.types'
+import { TextInput } from '@/components/Input/TextInput'
 
 interface Props {
   value?: DateTimeValues
@@ -37,6 +37,7 @@ const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChang
     if (activeDateTimeKey.current) {
       hightlightSelectionText(activeDateTimeKey.current)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDateTimeKey, textHighlightTrigger])
 
   const hightlightSelectionText = (dateTimeKey: DateTimeKey | undefined) => {
@@ -79,6 +80,7 @@ const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChang
         previous: activeDateTimeKey.current,
       })
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [activeDateTimeKey],
   )
 
@@ -129,6 +131,7 @@ const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChang
       }
       e.preventDefault()
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [activeDateTimeKey, dateTimeValue],
   )
 

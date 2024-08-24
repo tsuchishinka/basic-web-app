@@ -60,7 +60,7 @@ export const createDeviceData = () => {
   const modelKeys = Object.keys(DEVICE_MODEL_LIST)
   const modelIndex = randomIndex(0, modelKeys.length - 1)
   const model = modelKeys[modelIndex]
-  const keyData = Object.entries(DEVICE_MODEL_LIST).find(([key, value]) => {
+  const keyData = Object.entries(DEVICE_MODEL_LIST).find(([key]) => {
     return key === model
   })
   const nameArray = (keyData as string[])[1] as string

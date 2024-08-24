@@ -1,6 +1,6 @@
-import { CSSProperties, ReactNode, useState } from 'react'
-import styles from './index.module.scss'
+import { CSSProperties, ReactNode } from 'react'
 import clsx from 'clsx'
+import styles from './index.module.scss'
 
 interface Props {
   children: ReactNode
@@ -17,7 +17,6 @@ const InputWrapper = ({
   labelWidth,
   label,
 }: Props) => {
-  const [] = useState('')
   const inputWrapperStyle = () => {
     const style: CSSProperties = {}
     if (labelPosition === 'left') {

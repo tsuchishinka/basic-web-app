@@ -1,5 +1,5 @@
-import { DateTimeKey, DateTimeValues, FormatItem } from './index.types'
 import { endOfMonth } from 'date-fns'
+import { DateTimeKey, DateTimeValues, FormatItem } from './index.types'
 
 const FORMAT_DATETIMEKEY_MAP_ARRAY: {
   dateTimeKey: keyof DateTimeValues
@@ -270,10 +270,6 @@ const getNumberKey = (keyCode: string) => {
     return undefined
   }
   return Number(keyCode.split(numKeyCodeList[numKeyCodeIndex]!)[1])
-}
-
-const numCodeIndex = (keyCode: string) => {
-  return ['Digit', 'Numpad'].findIndex((numKey) => keyCode.includes(numKey))
 }
 
 const isMoveNextFocusFromNewValue = (

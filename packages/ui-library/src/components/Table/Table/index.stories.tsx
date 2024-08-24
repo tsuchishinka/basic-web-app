@@ -1,12 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { title } from 'process'
-import { Table } from '.'
-import { TableHeader } from './TableHeader'
-import { TableHeaderRow } from './TableHeader/TableHeaderRow'
-import { TableHeaderData } from './TableHeader/TableHeaderRow/TableHeaderData'
 import { TableBody } from './TableBody'
 import { TableBodyRow } from './TableBody/TableBodyRow'
 import { TableBodyData } from './TableBody/TableBodyRow/TableBodyData'
+import { TableHeader } from './TableHeader'
+import { TableHeaderRow } from './TableHeader/TableHeaderRow'
+import { TableHeaderData } from './TableHeader/TableHeaderRow/TableHeaderData'
+import { Table } from '.'
 
 const meta = {
   title: 'Table/Table',

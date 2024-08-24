@@ -9,7 +9,8 @@
         "DB_NAME",
         "DEVICE_COLLECTION_NAME",
         "SECRET_KEY",
-        "USER_COLLECTION_NAME"
+        "USER_COLLECTION_NAME",
+        "PORT"
       ],
       "outputs": [".next/**", "!.next/cache/**"]
     },

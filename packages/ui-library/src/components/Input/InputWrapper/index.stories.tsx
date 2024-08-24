@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { InputWrapper } from '.'
 import { TextInput } from '../TextInput'
+import { InputWrapper } from '.'
 
 const meta = {
   title: 'Input/InputWrapper',

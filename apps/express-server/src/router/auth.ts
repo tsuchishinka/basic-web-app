@@ -1,5 +1,5 @@
 import express from 'express'
-import { checkSession, login } from '@/controller/auth'
+import { login } from '@/controller/auth'
 
 const authRouter = express.Router()
 

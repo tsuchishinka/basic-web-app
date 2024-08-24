@@ -8,7 +8,7 @@
     "incremental": false,
     "isolatedModules": true,
     "lib": ["ES6", "DOM", "DOM.Iterable"],
-    "module": "ES6",
+    "module": "ESNext",
     "moduleDetection": "force",
     "moduleResolution": "node",
     "noUncheckedIndexedAccess": true,

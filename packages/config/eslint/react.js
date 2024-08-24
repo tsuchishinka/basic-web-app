@@ -6,7 +6,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:react/recommended",
   ],
-  plugins: ["only-warn", "react-refresh"],
+  plugins: ["react-refresh"],
   root: true,
   env: {
     browser: true,

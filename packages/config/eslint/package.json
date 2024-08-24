@@ -11,7 +11,6 @@
     "eslint-config-turbo": "^1.10.12",
     "eslint-plugin-functional": "^6.5.1",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-unused-imports": "^3.2.0",
     "typescript": "^5.2.2"
   },

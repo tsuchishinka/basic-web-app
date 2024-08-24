@@ -6,7 +6,8 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --check \"**/*.{ts,tsx,md}\"",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -29,6 +30,9 @@
     }
   },
   "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,yaml,yml,html,css,md}": [
+      "prettier --write"
+    ],
     "packages/ui-library/**/*.{js,jsx,ts,tsx}": [
       "eslint -c packages/ui-library/.eslintrc.cjs"
     ],

@@ -5,7 +5,7 @@ module.exports = {
     "eslint-config-turbo",
     "plugin:@typescript-eslint/recommended",
   ],
-  plugins: ["only-warn", "import", "unused-imports"],
+  plugins: ["import", "unused-imports"],
   root: true,
   env: {
     node: true,
@@ -14,7 +14,7 @@ module.exports = {
     es6: true,
   },
   rules: {
-    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "unused-imports/no-unused-imports-ts": "error",
     "max-depth": "error",
     eqeqeq: "error",

@@ -1,7 +1,6 @@
 {
   "name": "@packages/ui-library",
   "version": "0.0.0",
-  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
@@ -14,13 +13,14 @@
   "scripts": {
     "dev": "run-p storybook typegen:scss-watch",
     "build": "rollup -c",
-    "lint": "eslint --fix src/**/*.{ts,tsx}",
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
     "prebuild": "rimraf dist",
     "storybook": "storybook dev -p 6009",
     "typegen:scss": "typed-scss-modules src",
     "typegen:scss-watch": "typed-scss-modules src --watch",
     "build-storybook": "storybook build",
-    "fmt": "pretter --write src/**/*.{ts,tsx}",
+    "format": "pretter --write src/**/*.{ts,tsx}",
     "prepare": "yarn build && husky install"
   },
   "repository": {
@@ -87,11 +87,5 @@
   },
   "resolutions": {
     "jackspeak": "2.1.1"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx.ts,tsx}": [
-      "yarn fmt",
-      "yarn lint"
-    ]
   }
 }

@@ -7,7 +7,7 @@ const getArgs = (props: ComponentData["props"]) => {
     .map((props) => {
       return ARGS_TEMPLATE.replace(/\{\$PROPS_NAME\}/g, props.name).replace(
         /\{\$PROPS_DEFAULT\}/g,
-        props.default ?? "undefined"
+        props.default ?? "undefined",
       );
     })
     .join("\n");
@@ -16,7 +16,7 @@ const getArgs = (props: ComponentData["props"]) => {
 const makeStorybookCode = (componentData: ComponentData) => {
   return STORYBOOK_TEMPLATE.replace(
     /\{\$NAME\}/g,
-    convertUpperCamelCase(componentData.name)
+    convertUpperCamelCase(componentData.name),
   ).replace(/\{\$ARGS\}/g, getArgs(componentData.props));
 };
 
