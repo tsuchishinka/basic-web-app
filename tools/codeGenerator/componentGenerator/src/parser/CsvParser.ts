@@ -1,5 +1,5 @@
-import papaparse, { ParseConfig, ParseStepResult } from "papaparse";
 import fs from "fs";
+import papaparse, { ParseConfig, ParseStepResult } from "papaparse";
 import { ComponentData } from "./ComponentData";
 import { IParser } from ".";
 
@@ -71,6 +71,8 @@ class CsvParser implements IParser {
             if (name === undefined) {
               return;
             }
+            const args = type?.split("=>")[0];
+            const returnTypeStr = type?.split("=>")[1]?.trim();
             switch (rowData[0]) {
               case "name":
                 componentData.name = name;
@@ -100,8 +102,6 @@ class CsvParser implements IParser {
                 });
                 break;
               case "event":
-                const args = type?.split("=>")[0];
-                const returnTypeStr = type?.split("=>")[1]?.trim();
                 componentData.event.push({
                   name,
                   args: args

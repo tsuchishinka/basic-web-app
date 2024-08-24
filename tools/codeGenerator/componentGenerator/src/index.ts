@@ -1,5 +1,5 @@
-import { Parser } from "./parser";
 import { generate } from "./generator";
+import { Parser } from "./parser";
 
 const outputRootPath =
   "/Users/tsuchida/develop/webApplication/turbo-app-for-study/tools/codeGenerator/componentGenerator/test";

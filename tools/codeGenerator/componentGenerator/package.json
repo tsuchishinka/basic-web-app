@@ -3,13 +3,17 @@
   "packageManager": "yarn@3.7.0",
   "main": "src/index.js",
   "scripts": {
-    "generate": "tsx src/index.ts"
+    "generate": "tsx src/index.ts",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "@types/eslint": "^9",
     "@types/papaparse": "^5.3.14",
+    "eslint": "^8.45.0",
     "papaparse": "^5.4.1",
     "tsx": "^4.14.0"
   }

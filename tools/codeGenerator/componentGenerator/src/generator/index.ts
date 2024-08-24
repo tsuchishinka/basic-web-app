@@ -1,6 +1,6 @@
+import fs from "fs";
 import { ComponentData } from "../parser/ComponentData";
 import { mkdir } from "../utils/mkdir";
-import fs from "fs";
 import { appendAncestors } from "./appendAncestors";
 import { makeComponentCode } from "./code/component/makeComponentCode";
 import { makeStorybookCode } from "./code/storybook/makeStorybookCode";

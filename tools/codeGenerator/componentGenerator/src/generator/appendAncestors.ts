@@ -1,6 +1,5 @@
 import cloneDeep from "lodash.clonedeep";
 import { ComponentData } from "../parser/ComponentData";
-import { isEqualsGreaterThanToken } from "typescript";
 
 type ComponentTreeNode = ComponentData & {
   parent: string | undefined;
