@@ -5,19 +5,39 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint:fix": "turbo lint:fix",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@packages/eslint-config": "*",
     "@packages/typescript-config": "*",
     "@types/lodash.clonedeep": "^4.5.9",
     "@typescript-eslint/eslint-plugin": "latest",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
     "lodash.clonedeep": "^4.5.0",
     "prettier": "^3.1.0",
     "turbo": "latest"
   },
   "engines": {
     "node": ">=18"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "packages/ui-library/**/*.{js,jsx,ts,tsx}": [
+      "eslint -c packages/ui-library/.eslintrc.cjs"
+    ],
+    "apps/express-server/**/*.{js,jsx,ts,tsx}": [
+      "eslint -c apps/express-server/.eslintrc.cjs"
+    ],
+    "apps/react-front/**/*.{js,jsx,ts,tsx}": [
+      "eslint -c apps/react-front/.eslintrc.cjs"
+    ]
   },
   "packageManager": "yarn@3.7.0",
   "workspaces": [
