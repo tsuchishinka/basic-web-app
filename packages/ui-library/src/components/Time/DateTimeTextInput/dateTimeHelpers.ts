@@ -1,7 +1,7 @@
 import { endOfMonth } from 'date-fns'
 import { DateTimeKey, DateTimeValues, FormatItem } from './index.types'
 
-const FORMAT_DATETIMEKEY_MAP_ARRAY: {
+const FORMAT_DATE_TIME_KEY_MAP_ARRAY: {
   dateTimeKey: keyof DateTimeValues
   formatItem: FormatItem
 }[] = [
@@ -56,7 +56,7 @@ const clamp = (min: number, value: number, max: number) => {
 }
 
 const sortedDateTimeKeyInfo = (format: string) => {
-  const dateTimeInfoList = FORMAT_DATETIMEKEY_MAP_ARRAY.map((formatMap) => {
+  const dateTimeInfoList = FORMAT_DATE_TIME_KEY_MAP_ARRAY.map((formatMap) => {
     const positionIndex = format.indexOf(formatMap.formatItem)
     return {
       dateTimeKey: formatMap.dateTimeKey,
@@ -228,7 +228,6 @@ const updateDateTimeValue = (
   },
   zeroPaddedCount: number,
 ) => {
-  console.log(`keycode oomoto: ${keyCode}`)
   if (keyCode === 'Home') {
     return {
       ...dateTimeValue,

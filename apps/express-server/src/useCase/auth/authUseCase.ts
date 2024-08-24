@@ -14,7 +14,7 @@ class AuthUseCase {
   async login(userName: string, password: string, loginCallback: () => void) {
     const userNameValue = new UserName(userName)
     if (!(await this.userService.existFromAuthAttribute(userNameValue, password))) {
-      throw new Error('Authentificate failed')
+      throw new Error('Authenticate failed')
     }
     loginCallback()
   }

@@ -35,12 +35,12 @@ const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChang
 
   useEffect(() => {
     if (activeDateTimeKey.current) {
-      hightlightSelectionText(activeDateTimeKey.current)
+      highlightSelectionText(activeDateTimeKey.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDateTimeKey, textHighlightTrigger])
 
-  const hightlightSelectionText = (dateTimeKey: DateTimeKey | undefined) => {
+  const highlightSelectionText = (dateTimeKey: DateTimeKey | undefined) => {
     if (dateTimeKey === undefined) {
       return
     }
@@ -61,7 +61,7 @@ const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChang
 
       const selectedDateTimeKey = getDateTimeKey(clickedPosition, format)
       if (selectedDateTimeKey === activeDateTimeKey.current) {
-        hightlightSelectionText(selectedDateTimeKey)
+        highlightSelectionText(selectedDateTimeKey)
         return
       }
 

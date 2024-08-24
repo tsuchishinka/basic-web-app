@@ -1,25 +1,25 @@
 import { ReactNode, createContext, useEffect, useState } from 'react'
 import styles from './index.module.scss'
 
-const defaultValue: { collomnWidthValues: string[] } = {
-  collomnWidthValues: [],
+const defaultValue: { columnWidthValues: string[] } = {
+  columnWidthValues: [],
 }
 
 const TableContext = createContext(defaultValue)
 
 interface Props {
-  collomnWidthList: string[]
+  columnWidthList: string[]
   children: ReactNode
 }
 
-const Table = ({ children, collomnWidthList = [] }: Props) => {
-  const [collomnWidthValues, setCollomnWidthValues] = useState<string[]>([])
+const Table = ({ children, columnWidthList = [] }: Props) => {
+  const [columnWidthValues, setColumnWidthValues] = useState<string[]>([])
 
   useEffect(() => {
-    setCollomnWidthValues(collomnWidthList)
-  }, [collomnWidthList])
+    setColumnWidthValues(columnWidthList)
+  }, [columnWidthList])
   return (
-    <TableContext.Provider value={{ collomnWidthValues }}>
+    <TableContext.Provider value={{ columnWidthValues }}>
       <table className={styles.table}>{children}</table>
     </TableContext.Provider>
   )

@@ -1,0 +1,11 @@
+safie
+tsuchida
+resave
+clonedeep
+reduxjs
+prettier
+Turborepo
+turborepo
+papaparse
+autodocs
+vivotech

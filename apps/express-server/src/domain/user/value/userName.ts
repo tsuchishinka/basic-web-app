@@ -7,7 +7,7 @@ class UserName {
       throw new Error('Username cannot be empty')
     }
     if (value.length > USER_CONST.USERNAME.MAX_LENGTH) {
-      throw new Error(`Username must be in ${USER_CONST.USERNAME.MAX_LENGTH} charactors`)
+      throw new Error(`Username must be in ${USER_CONST.USERNAME.MAX_LENGTH} characters`)
     }
     this.value = value
   }

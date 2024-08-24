@@ -24,24 +24,24 @@ class UserFetchUseCase {
   fetchUsers = async (
     offset: number | undefined,
     limit: number | undefined,
-    seatchParams?: { name?: string },
+    searchParams?: { name?: string },
   ): Promise<ResponseFetchUsers> => {
     const complementedOffset = offset ?? 0
     const complementedLimit = limit ?? COMMON_CONST.REQUEST_LIMIT_SIZE
-    const userName = seatchParams?.name ? new UserName(seatchParams.name) : undefined
+    const userName = searchParams?.name ? new UserName(searchParams.name) : undefined
     const param = {
       userName,
     }
 
     const {
-      offset: responsedOffset,
+      offset: responseOffset,
       pageCount,
       total,
       list,
     } = await this.repository.fetchUsers(complementedOffset, complementedLimit, param)
 
     return {
-      offset: responsedOffset,
+      offset: responseOffset,
       total,
       count: pageCount,
       list: list.map((user) => {

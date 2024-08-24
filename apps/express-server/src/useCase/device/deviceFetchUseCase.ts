@@ -40,7 +40,7 @@ class DeviceFetchUseCase {
       list,
       offset: newOffset,
     } = await this.repository.fetchDevices(complementedOffset, complementedLimit, params)
-    const responsedList =
+    const responseList =
       list.length > 0
         ? list.map((device) => {
             return {
@@ -56,7 +56,7 @@ class DeviceFetchUseCase {
       offset: newOffset,
       total,
       count: pageCount,
-      list: responsedList,
+      list: responseList,
     }
   }
 }

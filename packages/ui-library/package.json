@@ -20,7 +20,7 @@
     "typegen:scss": "typed-scss-modules src",
     "typegen:scss-watch": "typed-scss-modules src --watch",
     "build-storybook": "storybook build",
-    "format": "pretter --write src/**/*.{ts,tsx}",
+    "format": "prettier --write src/**/*.{ts,tsx}",
     "prepare": "yarn build && husky install"
   },
   "repository": {
@@ -84,8 +84,5 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "18.2.0"
-  },
-  "resolutions": {
-    "jackspeak": "2.1.1"
   }
 }

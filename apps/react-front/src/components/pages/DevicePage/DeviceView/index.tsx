@@ -32,7 +32,7 @@ const _DeviceView = () => {
 
   return (
     <>
-      <div className={styles['serch-form']}>
+      <div className={styles['search-form']}>
         <div style={{ width: '30rem' }}>
           <TextInput value={searchWords} onChange={onChange} />
         </div>

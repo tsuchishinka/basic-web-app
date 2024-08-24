@@ -7,7 +7,7 @@ const login = async (req: Request, res: Response) => {
     const { name, password }: RequestLogin = req.body
 
     const loginCallback = () => {
-      req.session.logined = true
+      req.session.login = true
     }
     await authUseCase.login(name, password, loginCallback)
 
@@ -15,13 +15,13 @@ const login = async (req: Request, res: Response) => {
       message: 'success',
     })
   } catch (e) {
-    res.status(401).send('Authentificate failed')
+    res.status(401).send('Authenticate failed')
   }
 }
 
 const checkSession = (req: Request, res: Response, next: NextFunction) => {
-  if (req.session.logined === undefined) {
-    res.status(401).send('Authentificate failed')
+  if (req.session.login === undefined) {
+    res.status(401).send('Authenticate failed')
     next('error')
   }
   next()

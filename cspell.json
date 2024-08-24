@@ -1,0 +1,12 @@
+{
+  "version": "0.2",
+  "ignorePaths": ["*.svg", "*.lock", "*.snap", ".vscode/extensions.json"],
+  "import": ["@cspell/dict-de-de/cspell-ext.json"],
+  "dictionaries": ["de-de", "custom-words"],
+  "dictionaryDefinitions": [
+    {
+      "name": "custom-words",
+      "path": "./packages/config/cspell/custom-words.txt"
+    }
+  ]
+}

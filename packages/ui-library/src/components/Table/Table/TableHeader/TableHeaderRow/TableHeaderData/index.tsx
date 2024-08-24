@@ -9,10 +9,10 @@ interface Props {
 
 const TableHeaderData = ({ children, index }: Props) => {
   const cellIndex = index ?? 0
-  const { collomnWidthValues } = useContext(TableContext)
+  const { columnWidthValues } = useContext(TableContext)
   const width =
-    collomnWidthValues !== undefined && cellIndex < collomnWidthValues.length
-      ? collomnWidthValues[cellIndex]
+    columnWidthValues !== undefined && cellIndex < columnWidthValues.length
+      ? columnWidthValues[cellIndex]
       : undefined
   return (
     <th className={styles['header-data']} style={{ width }}>
