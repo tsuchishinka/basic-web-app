@@ -1,4 +1,5 @@
-import { ComponentData } from "../parser/ComponentData";
+import { ComponentData } from "../../../parser/ComponentData";
+import { convertUpperCamelCase } from "../../../utils/convertUpperCamelCase";
 import {
   COMPONENT_TEMPLATE,
   DEFAULT_TEMPLATE,
@@ -11,8 +12,7 @@ import {
   STATE_TEMPLATE,
   STATE_TYPE_TEMPLATE,
   TYPE_TEMPLATE,
-} from "../template/component";
-import { convertUpperCamelCase } from "../utils/convertUpperCamelCase";
+} from "./template";
 
 const getPropsCode = (propsList: ComponentData["props"]) => {
   return propsList
@@ -94,7 +94,7 @@ const getEventCode = (eventList: ComponentData["event"]) => {
     .join("\n");
 };
 
-const getComponentCodeStr = (componentData: ComponentData) => {
+const makeComponentCode = (componentData: ComponentData) => {
   return COMPONENT_TEMPLATE.replace(
     /\{\$PROPS\}/g,
     getPropsCode(componentData.props)
@@ -106,4 +106,4 @@ const getComponentCodeStr = (componentData: ComponentData) => {
     .replace(/\{\$TYPE\}/g, getTypeCode(componentData.type));
 };
 
-export { getComponentCodeStr };
+export { makeComponentCode };

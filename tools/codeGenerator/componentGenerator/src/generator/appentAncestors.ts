@@ -1,9 +1,7 @@
 import cloneDeep from "lodash.clonedeep";
 import { ComponentData } from "../parser/ComponentData";
 
-type ComponentTreeNode = {
-  name: string;
-  componentData: ComponentData;
+type ComponentTreeNode = ComponentData & {
   parent: string | undefined;
   ancestors: string[];
 };
@@ -31,11 +29,12 @@ const appendParentAncestors = (
   return newComponentTree;
 };
 
-const makeComponentTree = (componentList: ComponentData[]) => {
+const appendAncestors = (
+  componentList: ComponentData[]
+): (ComponentData & { ancestors: string[] })[] => {
   let componentTree: ComponentTreeNode[] = componentList.map((component) => {
     return {
-      name: component.name,
-      componentData: component,
+      ...component,
       parent: undefined,
       ancestors: [],
     };
@@ -52,19 +51,19 @@ const makeComponentTree = (componentList: ComponentData[]) => {
   for (const node of componentTree) {
     componentTree = appendParentAncestors(componentTree, node.name);
   }
-  return componentTree;
+  return componentTree.map(
+    ({ name, child, event, props, state, type, ancestors }) => {
+      return {
+        name,
+        child,
+        event,
+        props,
+        state,
+        type,
+        ancestors,
+      };
+    }
+  );
 };
 
-const getComponentDirPath = (
-  rootPath: string,
-  { name, ancestors }: ComponentTreeNode
-) => {
-  if (ancestors.length === 0) {
-    return `${rootPath}/${name}`;
-  } else {
-    return `${rootPath}/${ancestors.reverse().join("/")}/${name}`;
-  }
-};
-
-export { makeComponentTree, getComponentDirPath };
-export type { ComponentTreeNode };
+export { appendAncestors };

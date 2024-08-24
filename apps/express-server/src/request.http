@@ -25,8 +25,8 @@ POST http://localhost:8000/user
 Content-Type: application/json
 
 {
-    "name": "ningen",
-    "password": "i79%GR43"
+    "name": "tsuchida",
+    "password": "j68VmsBW"
 }
 
 ###

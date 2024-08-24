@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { title } from 'process'
 import { InputWrapper } from '.'
 import { TextInput } from '../TextInput'
 
