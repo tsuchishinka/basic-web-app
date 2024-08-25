@@ -3102,9 +3102,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@packages/eslint-config@npm:*, @packages/eslint-config@workspace:packages/config/eslint":
+"@packages/eslint@npm:*, @packages/eslint@workspace:packages/config/eslint":
   version: 0.0.0-use.local
-  resolution: "@packages/eslint-config@workspace:packages/config/eslint"
+  resolution: "@packages/eslint@workspace:packages/config/eslint"
   dependencies:
     "@typescript-eslint/eslint-plugin": "npm:^6.11.0"
     "@typescript-eslint/parser": "npm:^6.11.0"
@@ -3118,9 +3118,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@packages/typescript-config@npm:*, @packages/typescript-config@workspace:packages/config/typescript":
+"@packages/typescript@npm:*, @packages/typescript@workspace:packages/config/typescript":
   version: 0.0.0-use.local
-  resolution: "@packages/typescript-config@workspace:packages/config/typescript"
+  resolution: "@packages/typescript@workspace:packages/config/typescript"
   languageName: unknown
   linkType: soft
 
@@ -16060,8 +16060,8 @@ __metadata:
   resolution: "tsuchida-turbo-app@workspace:."
   dependencies:
     "@cspell/dict-de-de": "npm:^4.0.0"
-    "@packages/eslint-config": "npm:*"
-    "@packages/typescript-config": "npm:*"
+    "@packages/eslint": "npm:*"
+    "@packages/typescript": "npm:*"
     "@types/lodash.clonedeep": "npm:^4.5.9"
     "@typescript-eslint/eslint-plugin": "npm:latest"
     cspell: "npm:^8.14.2"

@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['@packages/eslint-config/react.js'],
+  extends: ['@packages/eslint/react.js'],
   settings: {
     react: {
       version: 'detect',

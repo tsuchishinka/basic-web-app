@@ -3,12 +3,11 @@ const fetchAll = async <T>(
 ) => {
   const stackedList: T[] = []
   let offset = 0
-  let finish = false
-  while (!finish) {
+  while (1) {
     const response = await fetchFunction(offset)
     response.list.forEach((item) => stackedList.push(item))
     if (offset + response.list.length >= response.total) {
-      finish = true
+      break
     }
     offset += response.list.length
   }
