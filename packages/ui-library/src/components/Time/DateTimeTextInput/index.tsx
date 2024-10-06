@@ -58,10 +58,11 @@ const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChang
       if (clickedPosition === null) {
         return
       }
-
+      console.log(`clickedPostion: ${JSON.stringify(clickedPosition)}`)
       const selectedDateTimeKey = getDateTimeKey(clickedPosition, format)
+      console.log(`selectedDateTImeKey: ${JSON.stringify(selectedDateTimeKey)}`)
+      highlightSelectionText(selectedDateTimeKey)
       if (selectedDateTimeKey === activeDateTimeKey.current) {
-        highlightSelectionText(selectedDateTimeKey)
         return
       }
 
@@ -101,12 +102,7 @@ const _DateTimeTextInput = ({ value, placeholder, format = 'YYYY-MM-DD', onChang
         zeroPaddingCount,
       )
       setDateTimeValue(newValue)
-      const isFilledAllKey = Object.keys(newValue).every(
-        (key) => newValue[key as DateTimeKey] !== undefined,
-      )
-      if (isFilledAllKey) {
-        onChange(newValue)
-      }
+      onChange(newValue)
       if (newValue && newValue[activeDateTimeKey.current] === 0) {
         setZeroPaddingCount((prev) => prev++)
       }

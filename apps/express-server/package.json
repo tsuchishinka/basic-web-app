@@ -2,11 +2,12 @@
   "name": "express_server",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "dev": "nodemon --exec ts-node -r tsconfig-paths/register  src/main.ts"
+    "dev": "nodemon --exec tsx src/main.ts"
   },
   "author": "",
   "license": "MIT",
@@ -36,8 +37,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-unused-imports": "^3.2.0",
     "prettier": "^3.0.2",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.1",
     "typescript": "^5.2.2"
   }
 }
