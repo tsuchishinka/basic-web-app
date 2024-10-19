@@ -1,60 +1,77 @@
 import { ComponentData } from "../parser/ComponentData";
 
-type ComponentTree = Omit<ComponentData, "children"> & {
-  children: ComponentTree[];
+type TreeNode = {
+  name: string;
+  children: TreeNode[];
 };
 
-const updateChildren = (
-  children: ComponentTree[],
-  rootChildren: ComponentTree[]
-): ComponentTree[] => {
-  return children.map((component) => {
-    const tempChildren: ComponentTree[] = [];
-    for (const child of component.children) {
-      // childがrootChildrenから見つかれば自身の子階層に移動する
-      const childIndex = rootChildren.findIndex(
-        ({ name }) => child.name === name
-      );
-      if (childIndex !== -1) {
-        tempChildren.push(rootChildren[childIndex]);
-        rootChildren.splice(childIndex, 1);
-      }
+const searchNode = (
+  componentTree: TreeNode,
+  name: string
+): TreeNode | undefined => {
+  if (componentTree.name === name) {
+    return componentTree;
+  }
+
+  for (const child of componentTree.children) {
+    const result = searchNode(child, name);
+    if (result) {
+      return result;
     }
+  }
 
-    // childのさらに子供についても、rootChildrenから移動する
-    const newChildren =
-      tempChildren.length > 0 ? updateChildren(tempChildren, rootChildren) : [];
-
-    return {
-      ...component,
-      children: newChildren,
-    };
-  });
+  return undefined;
 };
 
 /**
  * 正しい親子関係のコンポーネントツリーを生成する
  * @param data パースしたコンポーネントデータ
  */
-const createComponentTree = (components: ComponentData[]): ComponentTree[] => {
-  const rootChildren: ComponentTree[] = components.map((component) => {
-    return {
-      ...component,
-      children: component.children.map((name) => {
-        const child: ComponentTree = {
-          name,
-          events: [],
-          props: [],
-          states: [],
-          types: [],
+const createComponentTree = (components: ComponentData[]): TreeNode => {
+  const componentTree: TreeNode = {
+    name: "root",
+    children: [],
+  };
+
+  for (const component of components) {
+    if (component.children.length === 0) {
+      continue;
+    }
+
+    // 新しいノードの作成
+    const newNode: TreeNode = {
+      name: component.name,
+      children: component.children.map((child) => {
+        return {
+          name: child,
           children: [],
         };
-        return child;
       }),
     };
-  });
-  return updateChildren(rootChildren, rootChildren);
+
+    // Rootに子ノードがあれば移動する
+    for (const newChild of newNode.children) {
+      const idx = componentTree.children.findIndex(
+        (child) => newChild.name === child.name
+      );
+      if (idx !== -1) {
+        newNode.children = componentTree.children[idx].children;
+        componentTree.children.splice(idx, 1);
+      }
+    }
+
+    // ノードを探索する
+    const node = searchNode(componentTree, component.name);
+    if (node) {
+      // nodeが見つかれば子供を更新する
+      node.children = newNode.children;
+    } else {
+      // nodeが見つからなければrootに置く
+      componentTree.children.push(newNode);
+    }
+  }
+  return componentTree;
 };
 
 export { createComponentTree };
-export type { ComponentTree };
+export type { TreeNode };

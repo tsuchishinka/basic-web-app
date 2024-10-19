@@ -1,4 +1,4 @@
-const ARGS_TEMPLATE = `{$PROPS_NAME} = {$PROPS_DEFAULT}`;
+const ARGS_TEMPLATE = `{$NAME}: {$DEFAULT}`;
 
 const STORYBOOK_TEMPLATE = `import { Meta, StoryObj } from '@storybook/react'
 import { {$NAME} } from '.'

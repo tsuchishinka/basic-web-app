@@ -4,10 +4,12 @@ import { ARGS_TEMPLATE, STORYBOOK_TEMPLATE } from "./template";
 
 const getArgs = (props: ComponentData["props"]) => {
   return props
-    .map((props) => {
-      return ARGS_TEMPLATE.replace(/\{\$PROPS_NAME\}/g, props.name).replace(
-        /\{\$PROPS_DEFAULT\}/g,
-        props.default ?? "undefined"
+    .map(({ name, default: defaultValue }, index) => {
+      return (
+        ARGS_TEMPLATE.replace(/\{\$NAME\}/g, name).replace(
+          /\{\$DEFAULT\}/g,
+          defaultValue ?? "undefined"
+        ) + (index < props.length - 1 ? "," : "")
       );
     })
     .join("\n");
