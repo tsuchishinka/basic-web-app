@@ -1,5 +1,5 @@
 import { ComponentData } from "../../../parser/ComponentData";
-import { convertUpperCamelCase } from "../../../utils/convertUpperCamelCase";
+import { convertUpperCamelCase } from "../../../../utils/convertUpperCamelCase";
 import { ARGS_TEMPLATE, STORYBOOK_TEMPLATE } from "./template";
 
 const getArgs = (props: ComponentData["props"]) => {
