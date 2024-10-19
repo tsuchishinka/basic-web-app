@@ -5,9 +5,9 @@ type Setting = {
   outputPath: string;
 };
 const settings: Setting = {
-  category: "component",
+  category: "function",
   componentType: "app",
-  csvFilePath: "/Users/tsuchida/Downloads/csvCodeGenerateFile/components.csv",
+  csvFilePath: "/Users/tsuchida/Downloads/csvCodeGenerateFile/functions.csv",
   outputPath:
     "/Users/tsuchida/develop/webApplication/basic-web-app/tools/codeGenerator/test",
 };

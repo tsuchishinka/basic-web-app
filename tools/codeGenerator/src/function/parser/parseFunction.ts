@@ -5,6 +5,7 @@ import { FunctionData } from "./FunctionData";
 const getInitialFunctionData = (): FunctionData => {
   return {
     name: "",
+    path: undefined,
     args: [],
     types: [],
     returnType: undefined,
@@ -72,6 +73,8 @@ const parseFunctions = (csvFilePath: string): Promise<FunctionData[]> => {
             functionData.name = name;
             functionData.returnType = type;
             functionData.description = description;
+          } else if (rowHeader.includes("path")) {
+            functionData.path = name;
           } else if (rowHeader.includes("arg")) {
             if (type !== undefined) {
               functionData.args.push({
