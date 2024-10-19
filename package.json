@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@cspell/dict-de-de": "^4.0.0",
-    "@packages/eslint": "*",
     "@packages/typescript": "*",
     "@types/lodash.clonedeep": "^4.5.9",
     "@typescript-eslint/eslint-plugin": "latest",

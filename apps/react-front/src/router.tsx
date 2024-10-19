@@ -1,23 +1,45 @@
-import { Route, Routes } from 'react-router-dom'
+import { createBrowserRouter, Route, Routes } from 'react-router-dom'
 import { DefaultLayout } from './components/layout/DefaultLayout'
 import { DevicePage } from './components/pages/DevicePage'
 import { LoginPage } from './components/pages/LoginPage'
+import { ROUTER } from './const/ROUTER'
 
-const Router = () => {
-  return (
-    <Routes>
-      <Route path='/' element={<LoginPage />} />
-      <Route path='/device' element={<DevicePage />} />
-    </Routes>
-  )
-}
+const APP_ROUTERS = [
+  {
+    path: ROUTER.DEVICE,
+    element: <DevicePage />,
+  },
+]
 
-const App = () => {
+const AppRouter = () => {
   return (
     <DefaultLayout>
-      <Router />
+      <Routes>
+        {APP_ROUTERS.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+      </Routes>
     </DefaultLayout>
   )
 }
 
-export default App
+const LoginRouter = () => {
+  return (
+    <DefaultLayout hasSideBar={false}>
+      <LoginPage />
+    </DefaultLayout>
+  )
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LoginRouter />,
+  },
+  {
+    path: '*',
+    element: <AppRouter />,
+  },
+])
+
+export { router }

@@ -1,10 +1,10 @@
 export type Styles = {
-  list: string
-  'search-form': string
-}
+  list: string;
+  "search-form": string;
+};
 
-export type ClassNames = keyof Styles
+export type ClassNames = keyof Styles;
 
-declare const styles: Styles
+declare const styles: Styles;
 
-export default styles
+export default styles;

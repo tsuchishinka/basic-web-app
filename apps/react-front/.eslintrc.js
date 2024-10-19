@@ -2,10 +2,7 @@ module.exports = {
   root: true,
   extends: ['custom/react.js'],
   parser: '@typescript-eslint/parser',
-  settings: {
-    react: {
-      version: 'detect',
-    },
+  parserOptions: {
+    project: true,
   },
-  ignorePatterns: ['node_modules/', 'dist/'],
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@packages/eslint'],
+  extends: ['custom'],
   parserOptions: {
     sourceType: 'modules',
   },

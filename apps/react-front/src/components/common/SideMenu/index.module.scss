@@ -1,0 +1,13 @@
+.base {
+  position: relative;
+  width: 7rem;
+}
+
+.side-bar {
+  width: 7rem;
+  height: calc(100vh - 6rem);
+  position: absolute;
+  top: 0;
+  border: 1px solid #000;
+  font-size: 1rem;
+}

@@ -5,14 +5,15 @@ import { SideMenu } from '@/components/common/SideMenu'
 
 interface Props {
   children: ReactNode
+  hasSideBar?: boolean
 }
 
-const DefaultLayout = ({ children }: Props) => {
+const DefaultLayout = ({ children, hasSideBar = true }: Props) => {
   return (
     <>
       <Header />
       <div className={styles.body}>
-        <SideMenu />
+        {hasSideBar && <SideMenu />}
         {children}
       </div>
     </>
