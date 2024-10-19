@@ -5,11 +5,11 @@ import { ComponentData } from "./ComponentData";
 const getInitialComponentData = (): ComponentData => {
   return {
     name: "",
-    child: [],
+    children: [],
     props: [],
-    event: [],
-    type: [],
-    state: [],
+    events: [],
+    types: [],
+    states: [],
   };
 };
 
@@ -81,20 +81,20 @@ const parseComponents = (csvFilePath: string): Promise<ComponentData[]> => {
               required,
             });
           } else if (rowHeader.includes("state")) {
-            componentData.state.push({
+            componentData.states.push({
               name,
               type,
               description,
               default: defaultData,
             });
           } else if (rowHeader.includes("type")) {
-            componentData.type.push({
+            componentData.types.push({
               name,
               type,
               description,
             });
           } else if (rowHeader.includes("event")) {
-            componentData.event.push({
+            componentData.events.push({
               name,
               args: args
                 ? args
@@ -106,7 +106,7 @@ const parseComponents = (csvFilePath: string): Promise<ComponentData[]> => {
               description,
             });
           } else if (rowHeader.includes("child")) {
-            componentData.child.push(name);
+            componentData.children.push(name);
           }
         } else if (isParsing) {
           // コンポーネントの区切りで空行になった時

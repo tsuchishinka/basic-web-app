@@ -20,7 +20,7 @@ const makePropsCode = (propsList: ComponentData["props"]) => {
       return PROPS_TEMPLATE.replace(/\{\$NAME\}/g, name)
         .replace(
           /\{\$PROPS_TYPE\}/g,
-          type ? PROPS_TYPE_TEMPLATE.replace(/\{\$TYPE\}/g, type) : "",
+          type ? PROPS_TYPE_TEMPLATE.replace(/\{\$TYPE\}/g, type) : ""
         )
         .replace(/\{\$REQUIRED\}/g, required ? "" : "?")
         .replace(
@@ -28,9 +28,9 @@ const makePropsCode = (propsList: ComponentData["props"]) => {
           description
             ? PROPS_DESCRIPTION_TEMPLATE.replace(
                 /\{\$DESCRIPTION\}/g,
-                description,
+                description
               )
-            : "",
+            : ""
         );
     })
     .join("\n");
@@ -45,54 +45,54 @@ const makeInitialValue = (propsList: ComponentData["props"]) => {
           defaultValue
             ? DEFAULT_VALUE_TEMPLATE.replace(
                 /\{\$VALUE\}/g,
-                defaultValue ?? "undefined",
+                defaultValue ?? "undefined"
               )
-            : "",
+            : ""
         ) + (index < propsList.length - 1 ? "," : "")
       );
     })
     .join("\n");
 };
 
-const makeStateCode = (stateList: ComponentData["state"]) => {
+const makeStateCode = (stateList: ComponentData["states"]) => {
   return stateList
     .map(({ name, type, default: defaultValue }) => {
       return STATE_TEMPLATE.replace(/\{\$NAME\}/g, name)
         .replace("{$SET_NAME}", `set${convertUpperCamelCase(name)}`)
         .replace(
           /\{\$STATE_TYPE\}/g,
-          type ? STATE_TYPE_TEMPLATE.replace(/\{\$TYPE\}/g, type) : "",
+          type ? STATE_TYPE_TEMPLATE.replace(/\{\$TYPE\}/g, type) : ""
         )
         .replace("{$DEFAULT}", defaultValue ?? "");
     })
     .join("\n");
 };
 
-const makeTypeCode = (typeList: ComponentData["type"]) => {
+const makeTypeCode = (typeList: ComponentData["types"]) => {
   return typeList
     .map(({ name, type }) => {
       return TYPE_TEMPLATE.replace(/\{\$NAME\}/g, name).replace(
         /\{\$TYPE\}/g,
-        type ?? "",
+        type ?? ""
       );
     })
     .join("\n");
 };
 
-const makeEventCode = (eventList: ComponentData["event"]) => {
+const makeEventCode = (eventList: ComponentData["events"]) => {
   return eventList
     .map(({ name, args, returnType }) => {
       return EVENT_TEMPLATE.replace(/\{\$NAME\}/g, name)
         .replace(
           /\{\$ASYNC\}/g,
-          returnType?.includes("Promise") ? "async " : "",
+          returnType?.includes("Promise") ? "async " : ""
         )
         .replace(/\{\$ARG_TYPE\}/g, args ?? "")
         .replace(
           /\{\$RETURN_TYPE\}/g,
           returnType
             ? EVENT_RETURN_TYPE_TEMPLATE.replace(/\{\$TYPE\}/g, returnType)
-            : "",
+            : ""
         );
     })
     .join("\n");
@@ -101,13 +101,13 @@ const makeEventCode = (eventList: ComponentData["event"]) => {
 const makeComponentCode = (componentData: ComponentData) => {
   return COMPONENT_TEMPLATE.replace(
     /\{\$PROPS\}/g,
-    makePropsCode(componentData.props),
+    makePropsCode(componentData.props)
   )
     .replace(/\{\$NAME\}/g, convertUpperCamelCase(componentData.name))
     .replace(/\{\$DEFAULT\}/g, makeInitialValue(componentData.props))
-    .replace(/\{\$STATE\}/g, makeStateCode(componentData.state))
-    .replace(/\{\$EVENT\}/g, makeEventCode(componentData.event))
-    .replace(/\{\$TYPE\}/g, makeTypeCode(componentData.type));
+    .replace(/\{\$STATE\}/g, makeStateCode(componentData.states))
+    .replace(/\{\$EVENT\}/g, makeEventCode(componentData.events))
+    .replace(/\{\$TYPE\}/g, makeTypeCode(componentData.types));
 };
 
 export { makeComponentCode };

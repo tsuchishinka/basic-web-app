@@ -7,24 +7,24 @@ type ComponentData = {
     default?: string | undefined;
     required?: boolean;
   }[];
-  state: {
+  states: {
     name: string;
     type: string | undefined;
     description?: string;
     default?: string | undefined;
   }[];
-  event: {
+  events: {
     name: string;
     args: string | undefined;
     returnType: string | undefined;
     description?: string;
   }[];
-  type: {
+  types: {
     name: string;
     type: string | undefined;
     description?: string;
   }[];
-  child: (string | undefined)[];
+  children: string[];
 };
 
 export type { ComponentData };

@@ -1,70 +1,60 @@
-import cloneDeep from "lodash.clonedeep";
 import { ComponentData } from "../parser/ComponentData";
 
-type ComponentTreeNode = ComponentData & {
-  parent: string | undefined;
-  ancestors: string[];
+type ComponentTree = Omit<ComponentData, "children"> & {
+  children: ComponentTree[];
 };
 
-const appendParentAncestors = (
-  componentTree: ComponentTreeNode[],
-  targetNodeName: string,
-): ComponentTreeNode[] => {
-  const newComponentTree = cloneDeep(componentTree);
-  const updatedNode = newComponentTree.find(
-    (node) => node.name === targetNodeName,
-  );
-
-  if (updatedNode?.parent !== undefined) {
-    const newParentNode = appendParentAncestors(
-      newComponentTree,
-      updatedNode.parent,
-    ).find((item) => item.name === updatedNode.parent);
-    if (newParentNode !== undefined) {
-      updatedNode.ancestors = [
-        ...updatedNode.ancestors,
-        ...newParentNode.ancestors,
-      ];
+const updateChildren = (
+  children: ComponentTree[],
+  rootChildren: ComponentTree[]
+): ComponentTree[] => {
+  return children.map((component) => {
+    const tempChildren: ComponentTree[] = [];
+    for (const child of component.children) {
+      // childがrootChildrenから見つかれば自身の子階層に移動する
+      const childIndex = rootChildren.findIndex(
+        ({ name }) => child.name === name
+      );
+      if (childIndex !== -1) {
+        tempChildren.push(rootChildren[childIndex]);
+        rootChildren.splice(childIndex, 1);
+      }
     }
-  }
-  return newComponentTree;
-};
 
-const appendAncestors = (
-  componentList: ComponentData[],
-): (ComponentData & { ancestors: string[] })[] => {
-  let componentTree: ComponentTreeNode[] = componentList.map((component) => {
+    // childのさらに子供についても、rootChildrenから移動する
+    const newChildren =
+      tempChildren.length > 0 ? updateChildren(tempChildren, rootChildren) : [];
+
     return {
       ...component,
-      parent: undefined,
-      ancestors: [],
+      children: newChildren,
     };
   });
-  componentList.forEach((component) => {
-    component.child.forEach((child) => {
-      const childNode = componentTree.find((tree) => tree.name === child);
-      if (childNode !== undefined) {
-        childNode.parent = component.name;
-        childNode.ancestors = [component.name];
-      }
-    });
-  });
-  for (const node of componentTree) {
-    componentTree = appendParentAncestors(componentTree, node.name);
-  }
-  return componentTree.map(
-    ({ name, child, event, props, state, type, ancestors }) => {
-      return {
-        name,
-        child,
-        event,
-        props,
-        state,
-        type,
-        ancestors,
-      };
-    },
-  );
 };
 
-export { appendAncestors };
+/**
+ * 正しい親子関係のコンポーネントツリーを生成する
+ * @param data パースしたコンポーネントデータ
+ */
+const createComponentTree = (components: ComponentData[]): ComponentTree[] => {
+  const rootChildren: ComponentTree[] = components.map((component) => {
+    return {
+      ...component,
+      children: component.children.map((name) => {
+        const child: ComponentTree = {
+          name,
+          events: [],
+          props: [],
+          states: [],
+          types: [],
+          children: [],
+        };
+        return child;
+      }),
+    };
+  });
+  return updateChildren(rootChildren, rootChildren);
+};
+
+export { createComponentTree };
+export type { ComponentTree };
