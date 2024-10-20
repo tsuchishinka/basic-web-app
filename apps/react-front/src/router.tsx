@@ -1,8 +1,8 @@
 import { createBrowserRouter, Route, Routes } from 'react-router-dom'
-import { DefaultLayout } from './components/layout/DefaultLayout'
-import { DevicePage } from './components/pages/DevicePage'
-import { LoginPage } from './components/pages/LoginPage'
-import { ROUTER } from './const/ROUTER'
+import { ROUTER } from './common/const/ROUTER'
+import { DefaultLayout } from './common/view/layout/DefaultLayout'
+import { DevicePage } from '@/feature/DevicePage/view'
+import { LoginPage } from '@/feature/LoginPage/view'
 
 const APP_ROUTERS = [
   {
