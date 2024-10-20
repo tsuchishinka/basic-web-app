@@ -1,5 +1,5 @@
-import { convertUpperCamelCase } from "../../../../utils/convertUpperCamelCase";
-import { ComponentData } from "../../../parser/ComponentData";
+import { ComponentData } from "../../parser/ComponentData";
+import { convertUpperCamelCase } from "../../utils/convertUpperCamelCase";
 import {
   COMPONENT_TEMPLATE,
   DEFAULT_TEMPLATE,
@@ -14,7 +14,7 @@ import {
   TYPE_TEMPLATE,
 } from "./template";
 
-const makePropsCode = (propsList: ComponentData["props"]) => {
+const getPropsCode = (propsList: ComponentData["props"]) => {
   return propsList
     .map(({ name, type, required, description }) => {
       return PROPS_TEMPLATE.replace(/\{\$NAME\}/g, name)
@@ -36,7 +36,7 @@ const makePropsCode = (propsList: ComponentData["props"]) => {
     .join("\n");
 };
 
-const makeInitialValue = (propsList: ComponentData["props"]) => {
+const getInitialValue = (propsList: ComponentData["props"]) => {
   return propsList
     .map(({ name, default: defaultValue }, index) => {
       return (
@@ -54,7 +54,7 @@ const makeInitialValue = (propsList: ComponentData["props"]) => {
     .join("\n");
 };
 
-const makeStateCode = (stateList: ComponentData["states"]) => {
+const getStateCode = (stateList: ComponentData["states"]) => {
   return stateList
     .map(({ name, type, default: defaultValue }) => {
       return STATE_TEMPLATE.replace(/\{\$NAME\}/g, name)
@@ -68,7 +68,7 @@ const makeStateCode = (stateList: ComponentData["states"]) => {
     .join("\n");
 };
 
-const makeTypeCode = (typeList: ComponentData["types"]) => {
+const getTypeCode = (typeList: ComponentData["types"]) => {
   return typeList
     .map(({ name, type }) => {
       return TYPE_TEMPLATE.replace(/\{\$NAME\}/g, name).replace(
@@ -79,7 +79,7 @@ const makeTypeCode = (typeList: ComponentData["types"]) => {
     .join("\n");
 };
 
-const makeEventCode = (eventList: ComponentData["events"]) => {
+const getEventCode = (eventList: ComponentData["events"]) => {
   return eventList
     .map(({ name, args, returnType }) => {
       return EVENT_TEMPLATE.replace(/\{\$NAME\}/g, name)
@@ -98,16 +98,17 @@ const makeEventCode = (eventList: ComponentData["events"]) => {
     .join("\n");
 };
 
-const makeComponentCode = (componentData: ComponentData) => {
+const getComponentCode = (componentData: ComponentData) => {
   return COMPONENT_TEMPLATE.replace(
     /\{\$PROPS\}/g,
-    makePropsCode(componentData.props)
+    getPropsCode(componentData.props)
   )
     .replace(/\{\$NAME\}/g, convertUpperCamelCase(componentData.name))
-    .replace(/\{\$DEFAULT\}/g, makeInitialValue(componentData.props))
-    .replace(/\{\$STATE\}/g, makeStateCode(componentData.states))
-    .replace(/\{\$EVENT\}/g, makeEventCode(componentData.events))
-    .replace(/\{\$TYPE\}/g, makeTypeCode(componentData.types));
+    .replace(/\{\$SCSS_NAME\}/g, componentData.name)
+    .replace(/\{\$DEFAULT\}/g, getInitialValue(componentData.props))
+    .replace(/\{\$STATE\}/g, getStateCode(componentData.states))
+    .replace(/\{\$EVENT\}/g, getEventCode(componentData.events))
+    .replace(/\{\$TYPE\}/g, getTypeCode(componentData.types));
 };
 
-export { makeComponentCode };
+export { getComponentCode };

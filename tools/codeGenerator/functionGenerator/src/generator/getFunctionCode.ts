@@ -1,4 +1,4 @@
-import { FunctionData } from "../../parser/FunctionData";
+import { FunctionData } from "../parser/FunctionData";
 import {
   ARG_DESCRIPTION_TEMPLATE,
   ARG_TEMPLATE,
@@ -7,20 +7,20 @@ import {
   TYPE_TEMPLATE,
 } from "./template";
 
-const makeTypeCode = (types: FunctionData["types"]) => {
+const getTypeCode = (types: FunctionData["types"]) => {
   return types
     .map(({ name, type }) => {
       return TYPE_TEMPLATE.replace(/\{\$NAME\}/g, name).replace(
         /\{\$TYPE\}/g,
-        type,
+        type
       );
     })
     .join("\n");
 };
 
-const makeDescriptionCode = (
+const getDescriptionCode = (
   description: FunctionData["description"],
-  args: FunctionData["args"],
+  args: FunctionData["args"]
 ) => {
   return DESCRIPTION_TEMPLATE.replace(
     /\{\$ARG_DESCRIPTION\}/g,
@@ -28,39 +28,39 @@ const makeDescriptionCode = (
       .map(({ name, description }) => {
         return ARG_DESCRIPTION_TEMPLATE.replace(/\{\$NAME\}/g, name).replace(
           /\{\$DESCRIPTION\}/g,
-          description ?? "",
+          description ?? ""
         );
       })
-      .join("\n"),
+      .join("\n")
   ).replace(/\{\$DESCRIPTION\}/g, description ?? "");
 };
 
-const makeArgsCode = (args: FunctionData["args"]) => {
+const getArgsCode = (args: FunctionData["args"]) => {
   return args
     .map(({ name, type }, index) => {
       if (index < args.length - 1) {
         return (
           ARG_TEMPLATE.replace(/\{\$NAME\}/g, name).replace(
             /\{\$TYPE\}/g,
-            type,
+            type
           ) + ","
         );
       }
       return ARG_TEMPLATE.replace(/\{\$NAME\}/g, name).replace(
         /\{\$TYPE\}/g,
-        type,
+        type
       );
     })
     .join("\n");
 };
 
-const makeFunctionCode = (functionData: FunctionData) => {
+const getFunctionCode = (functionData: FunctionData) => {
   const { name, types, args, description, returnType } = functionData;
   return FUNCTION_TEMPLATE.replace(/\{\$NAME\}/g, name)
-    .replace(/\{\$TYPE\}/g, makeTypeCode(types))
-    .replace(/\{\$DESCRIPTION\}/g, makeDescriptionCode(description, args))
-    .replace(/\{\$ARGS\}/g, makeArgsCode(args))
+    .replace(/\{\$TYPE\}/g, getTypeCode(types))
+    .replace(/\{\$DESCRIPTION\}/g, getDescriptionCode(description, args))
+    .replace(/\{\$ARGS\}/g, getArgsCode(args))
     .replace(/\{\$RETURN_TYPE\}/g, returnType ? `: ${returnType}` : "");
 };
 
-export { makeFunctionCode };
+export { getFunctionCode };

@@ -7047,19 +7047,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"code-generator@workspace:tools/codeGenerator":
-  version: 0.0.0-use.local
-  resolution: "code-generator@workspace:tools/codeGenerator"
-  dependencies:
-    "@types/eslint": "npm:^9"
-    "@types/papaparse": "npm:^5.3.14"
-    eslint: "npm:^8.45.0"
-    papaparse: "npm:^5.4.1"
-    tsx: "npm:^4.14.0"
-    typescript: "npm:^5.4.5"
-  languageName: unknown
-  linkType: soft
-
 "color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
@@ -9615,6 +9602,19 @@ __metadata:
   checksum: 10/185e20d20f10c8d661d59aac0f3b63b31132d492e1b11fcc2a93cb2c47257ebaee7407c38513efd2b35cafdf972d9beb2ea4593c1e0f3bf8f2744836928d7454
   languageName: node
   linkType: hard
+
+"function-generator@workspace:tools/codeGenerator/functionGenerator":
+  version: 0.0.0-use.local
+  resolution: "function-generator@workspace:tools/codeGenerator/functionGenerator"
+  dependencies:
+    "@types/eslint": "npm:^9"
+    "@types/papaparse": "npm:^5.3.14"
+    eslint: "npm:^8.45.0"
+    papaparse: "npm:^5.4.1"
+    tsx: "npm:^4.14.0"
+    typescript: "npm:^5.4.5"
+  languageName: unknown
+  linkType: soft
 
 "function.prototype.name@npm:^1.1.5, function.prototype.name@npm:^1.1.6":
   version: 1.1.6
@@ -12340,6 +12340,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"page-component-generator@workspace:tools/codeGenerator/pageComponentGenerator":
+  version: 0.0.0-use.local
+  resolution: "page-component-generator@workspace:tools/codeGenerator/pageComponentGenerator"
+  dependencies:
+    "@types/eslint": "npm:^9"
+    "@types/papaparse": "npm:^5.3.14"
+    eslint: "npm:^8.45.0"
+    papaparse: "npm:^5.4.1"
+    tsx: "npm:^4.14.0"
+    typescript: "npm:^5.4.5"
+  languageName: unknown
+  linkType: soft
+
 "pako@npm:~0.2.0":
   version: 0.2.9
   resolution: "pako@npm:0.2.9"
@@ -15025,6 +15038,19 @@ __metadata:
   checksum: 10/4c0b800e0ff192079d2c3ce8414fd3b656a570028c7c79af5c29c53d5c532b68bbcae4ad47307f89c2ee124d11826fff7a136b59d5c5bb18422bcdf5568afe1e
   languageName: node
   linkType: hard
+
+"ui-component-generator@workspace:tools/codeGenerator/uiLibraryGenerator":
+  version: 0.0.0-use.local
+  resolution: "ui-component-generator@workspace:tools/codeGenerator/uiLibraryGenerator"
+  dependencies:
+    "@types/eslint": "npm:^9"
+    "@types/papaparse": "npm:^5.3.14"
+    eslint: "npm:^8.45.0"
+    papaparse: "npm:^5.4.1"
+    tsx: "npm:^4.14.0"
+    typescript: "npm:^5.4.5"
+  languageName: unknown
+  linkType: soft
 
 "uid-safe@npm:~2.1.5":
   version: 2.1.5

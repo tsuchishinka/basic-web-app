@@ -1,7 +1,7 @@
 import fs from "fs";
-import { mkdir } from "../../utils/mkdir";
 import { FunctionData } from "../parser/FunctionData";
-import { makeFunctionCode } from "./code/makeFunctionCode";
+import { mkdir } from "../utils/mkdir";
+import { getFunctionCode } from "./getFunctionCode";
 
 const generateFunction = (destPath: string, functions: FunctionData[]) => {
   for (const functionData of functions) {
@@ -10,7 +10,7 @@ const generateFunction = (destPath: string, functions: FunctionData[]) => {
       dirPath = `${destPath}/${functionData.path}/${functionData.name}`;
     }
     mkdir(dirPath);
-    const functionCode = makeFunctionCode(functionData);
+    const functionCode = getFunctionCode(functionData);
     fs.writeFileSync(`${dirPath}/index.tsx`, functionCode);
   }
 };

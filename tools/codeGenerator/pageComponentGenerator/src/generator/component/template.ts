@@ -40,9 +40,9 @@ const {$NAME} = ({
 
   {$EVENT}
   return (
-    <>
+    <div className={styles.{$SCSS_NAME}}>
       {/** JSXを記述 **/}
-    </>
+    </div>
   )
 }
 
