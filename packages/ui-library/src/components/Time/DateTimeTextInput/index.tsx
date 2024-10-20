@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { MouseEvent } from 'react'
+import { TextInput } from '../../Input'
 import { getDateTimeText, getNextActiveDateTimeKey, getNumberKey } from './dateTimeHelpers'
 import {
   getSelectionRange,
@@ -10,7 +11,6 @@ import {
   isMoveNextFocusFromNewValue,
 } from './dateTimeHelpers'
 import { DateTimeKey, DateTimeValues } from './index.types'
-import { TextInput } from '@/components/Input/TextInput'
 
 interface Props {
   value?: DateTimeValues

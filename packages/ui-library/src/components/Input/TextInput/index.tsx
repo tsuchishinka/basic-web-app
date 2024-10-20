@@ -76,4 +76,5 @@ const _TextInput = forwardRef<HTMLInputElement, TextInputProps>(function _TextIn
   )
 })
 
-export const TextInput = memo(_TextInput)
+const TextInput = memo(_TextInput)
+export { TextInput }

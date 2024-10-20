@@ -14,9 +14,9 @@ POST http://localhost:8000/device
 Content-Type: application/json
 
 {
-    "name": "tsuchida800",
+    "name": "tsuchida80d0",
     "model": "CC2L",
-    "description": "古い"
+    "description": "新しい"
 }
 
 ###

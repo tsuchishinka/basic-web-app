@@ -1,8 +1,7 @@
 export * from './Button'
-export * from './Input/TextInput'
-export * from './Input/InputWrapper'
-export * from './Table/SimpleTable/SimpleTable'
-export * from './Other/Loading'
-export * from './Time/DateTimeTextInput'
+export * from './Input'
+export * from './Table'
+export * from './Other'
+export * from './Time'
 
 import '../utils/common.scss'
