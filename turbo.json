@@ -1,7 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [".env"],
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "env": [
@@ -10,7 +9,8 @@
         "DEVICE_COLLECTION_NAME",
         "SECRET_KEY",
         "USER_COLLECTION_NAME",
-        "PORT"
+        "PORT",
+        "BASE_URL"
       ],
       "outputs": [".next/**", "!.next/cache/**"]
     },

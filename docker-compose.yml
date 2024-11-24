@@ -1,0 +1,32 @@
+services:
+  react-front:
+    build:
+      context: .
+      dockerfile: ./apps/react-front/Dockerfile
+    container_name: react-front
+    ports:
+      - "8080:80"
+    networks:
+      - basic-web-app-server
+
+  express-server:
+    build: ./apps/express-server/.
+    container_name: express-server
+    ports:
+      - "8000:8000"
+    networks:
+      - basic-web-app-server
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - ./apps/mongo/init_db.js:/docker-entrypoint-initdb.d/init_db.js
+    ports:
+      - "27016:27017"
+    networks:
+      - basic-web-app-server
+
+networks:
+  basic-web-app-server:
+    driver: bridge

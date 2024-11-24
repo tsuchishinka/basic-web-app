@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-unused-vars": "error",
     "unused-imports/no-unused-imports-ts": "error",
+    "turbo/no-undeclared-env-vars": false,
     "max-depth": "error",
     eqeqeq: "error",
     complexity: "error",

@@ -7,9 +7,11 @@
     "build": "vite build",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prune": "turbo prune react-front"
   },
   "dependencies": {
+    "@packages/demo-api": "*",
     "@packages/ui-library": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

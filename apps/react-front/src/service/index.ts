@@ -1,8 +1,9 @@
-import { AxiosRequestClient, DeviceService, LoginService } from '@packages/demo-api'
+import { AxiosRequestClient, DeviceService, LoginService } from '@packages/demoAPI'
 
+const baseURL = import.meta.env.VITE_API_HOST ?? 'http://localhost:8000'
 const axiosClient = new AxiosRequestClient({
   contentType: 'application/json',
-  axiosConfig: { baseURL: 'http://localhost:8000', withCredentials: true },
+  axiosConfig: { baseURL, withCredentials: true },
 })
 
 const deviceService = new DeviceService(axiosClient)

@@ -1,14 +1,12 @@
 {
   "name": "@packages/demo-api",
-  "packageManager": "yarn@3.7.0",
-  "exports": {
-    ".": "./index.ts"
-  },
+  "version": "0.0.0",
   "devDependencies": {
     "@types/node": "^20.12.12",
     "eslint": "^9.3.0",
     "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vite": "^4.4.5"
   }
 }

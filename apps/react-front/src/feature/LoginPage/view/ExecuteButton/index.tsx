@@ -16,6 +16,7 @@ const ExecuteButton = () => {
       const newState = await login(state, loginService)
       dispatch(updateLoginPageState(newState))
     } catch (error: unknown) {
+      console.log(error)
       alert('APIエラーが発生しました')
       return
     }

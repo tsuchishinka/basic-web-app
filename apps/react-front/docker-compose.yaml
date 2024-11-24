@@ -1,0 +1,4 @@
+services:
+  react-front:
+    build: .
+    container_name: react-front

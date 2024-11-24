@@ -1,11 +1,6 @@
 {
   "name": "@packages/ui-library",
   "version": "0.0.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "exports": {
-    ".": "./index.ts"
-  },
   "files": [
     "dist"
   ],

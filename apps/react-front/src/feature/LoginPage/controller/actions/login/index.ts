@@ -1,4 +1,4 @@
-import { LoginService } from '@packages/demo-api'
+import { LoginService } from '@packages/demoAPI'
 import { LoginPageState } from '../../state'
 
 const login = async (

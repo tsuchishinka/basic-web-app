@@ -1,4 +1,4 @@
-import { DeviceService } from '@packages/demo-api'
+import { DeviceService } from '@packages/demoAPI'
 import { DevicePageState } from '../../state'
 
 const fetchDevices = async (

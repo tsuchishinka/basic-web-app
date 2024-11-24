@@ -1,19 +1,21 @@
 {
-  "name": "tsuchida-turbo-app",
+  "name": "basic-web-app",
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:react-front": "turbo build --filter=react-front",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "format": "prettier --check \"**/*.{ts,tsx,md}\"",
     "format:fix": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky",
-    "cspell": "cspell \"**\" --gitignore --show-suggestions"
+    "cspell": "cspell \"**\" --gitignore --show-suggestions",
+    "prune:react-front": "turbo prune react-front --docker",
+    "prune:express-server": "turbo prune express-server --docker"
   },
   "devDependencies": {
     "@cspell/dict-de-de": "^4.0.0",
-    "@packages/typescript": "*",
     "@types/lodash.clonedeep": "^4.5.9",
     "@typescript-eslint/eslint-plugin": "latest",
     "cspell": "^8.14.2",
@@ -52,7 +54,6 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "packages/**/*",
-    "tools/**/*"
+    "packages/**/*"
   ]
 }

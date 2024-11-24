@@ -5,6 +5,7 @@ import sessionRouter from './middleware/session'
 import appRoute from './router/index'
 
 env.config()
+const baseURL = process.env.BASE_URL
 const port = process.env.PORT || 8000
 
 const app = express()
@@ -18,5 +19,5 @@ app.use(sessionRouter)
 app.use('/', appRoute)
 
 app.listen(port, () => {
-  console.log(`start http://localhost:${port}`)
+  console.log(`start ${baseURL}:${port}`)
 })

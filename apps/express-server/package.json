@@ -1,13 +1,13 @@
 {
-  "name": "express_server",
+  "name": "express-server",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "dev": "nodemon --exec tsx src/main.ts"
+    "dev": "nodemon --exec tsx src/main.ts",
+    "build": "tsx ./scripts/build.js"
   },
   "author": "",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "@typescript-eslint/parser": "^6.4.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "esbuild": "^0.24.0",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-unused-imports": "^3.2.0",
