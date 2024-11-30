@@ -12,7 +12,7 @@ COPY --from=builder /usr/app/out/json/ .
 RUN corepack enable yarn
 RUN yarn install
 COPY --from=builder /usr/app/out/full/ .
-yarn build
+RUN yarn build
 WORKDIR ./apps/express-server
 
 
