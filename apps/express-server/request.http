@@ -1,16 +1,16 @@
-GET http://localhost:8000/device
+GET http://localhost:8000/app/device
 
 ###
-GET http://localhost:8000/device?name=4
+GET http://localhost:8000/app/device?name=4
 
-
-###
-
-GET http://localhost:8000/device/39346161323164642d383762
 
 ###
 
-POST http://localhost:8000/device
+GET http://localhost:8000/app/device/39346161323164642d383762
+
+###
+
+POST http://localhost:8000/app/device
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8000/user
+POST http://localhost:8000/app/user
 Content-Type: application/json
 
 {
@@ -31,18 +31,18 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8000/user
+GET http://localhost:8000/app/user
 ###
 
-GET http://localhost:8000/user?name=chi
+GET http://localhost:8000/app/user?name=chi
 ###
 
-GET http://localhost:8000/user/31373736323062382d383831
+GET http://localhost:8000/app/user/31373736323062382d383831
 
 
 ###
 
-POST http://localhost:8000/
+POST http://localhost:8000/app/
 Content-Type: application/json
 
 {
@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8000/device/auto-data
+POST http://localhost:8000/app/device/auto-data
 Content-Type: application/json
 
 {
@@ -60,7 +60,7 @@ Content-Type: application/json
 
 ###
 
-PATCH  http://localhost:8000/device
+PATCH  http://localhost:8000/app/device
 Content-Type: application/json
 
 {
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:8000/device
+DELETE  http://localhost:8000/app/device
 Content-Type: application/json
 
 {

@@ -3,6 +3,7 @@ import { ROUTER } from './common/const/ROUTER'
 import { DefaultLayout } from './common/view/layout/DefaultLayout'
 import { DevicePage } from '@/feature/DevicePage/view'
 import { LoginPage } from '@/feature/LoginPage/view'
+import { ChannelListener } from 'diagnostics_channel'
 
 const APP_ROUTERS = [
   {

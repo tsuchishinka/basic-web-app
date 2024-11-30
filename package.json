@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "build:react-front": "turbo build --filter=react-front",
+    "build:express-server": "turbo build --filter=express-server",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",

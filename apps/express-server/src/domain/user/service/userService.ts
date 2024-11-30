@@ -1,8 +1,8 @@
+import { LIMIT_DEFAULT } from '@/const/common'
+import fetchAll from '@/utils/fetchAll'
 import { IUserRepository } from '../IUserRepository'
 import Password from '../value/password'
 import UserName from '../value/userName'
-import COMMON_CONST from '@/common/const'
-import fetchAll from '@/utils/fetchAll'
 
 class UserService {
   repository: IUserRepository
@@ -11,7 +11,7 @@ class UserService {
   }
   async existFromAuthAttribute(userName: UserName, password: string) {
     const sameNameUsers = await fetchAll(async (offset: number) => {
-      const response = await this.repository.fetchUsers(offset, COMMON_CONST.REQUEST_LIMIT_SIZE, {
+      const response = await this.repository.fetchUsers(offset, LIMIT_DEFAULT, {
         userName: userName,
       })
       return {

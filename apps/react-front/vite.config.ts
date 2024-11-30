@@ -1,5 +1,5 @@
-import path from 'path'
 import react from '@vitejs/plugin-react-swc'
+import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -21,5 +21,17 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@packages': path.resolve(__dirname, '../../packages'),
     },
+  },
+  build: {
+    cssTarget: '',
+    rollupOptions: {
+      input: {
+        '': resolve(__dirname, 'index.html'),
+      },
+      output: {
+        entryFileNames: 'bundle.js',
+      },
+    },
+    minify: true,
   },
 })

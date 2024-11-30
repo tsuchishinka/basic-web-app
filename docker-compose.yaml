@@ -1,0 +1,7 @@
+services:
+  basic-web-app:
+    build: .
+    container_name: basic-web-app
+    ports:
+      - "80:8000"
+      - "27016:27017"

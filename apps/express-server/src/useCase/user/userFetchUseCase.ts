@@ -1,4 +1,4 @@
-import COMMON_CONST from '@/common/const'
+import { LIMIT_DEFAULT } from '@/const/common'
 import { ResponseFetchUser, ResponseFetchUsers } from '@/controller/user/index.type'
 import { IUserRepository } from '@/domain/user/IUserRepository'
 import UserName from '@/domain/user/value/userName'
@@ -27,7 +27,7 @@ class UserFetchUseCase {
     searchParams?: { name?: string },
   ): Promise<ResponseFetchUsers> => {
     const complementedOffset = offset ?? 0
-    const complementedLimit = limit ?? COMMON_CONST.REQUEST_LIMIT_SIZE
+    const complementedLimit = limit ?? LIMIT_DEFAULT
     const userName = searchParams?.name ? new UserName(searchParams.name) : undefined
     const param = {
       userName,

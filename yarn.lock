@@ -3070,6 +3070,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@node-kit/extra.fs@npm:3.3.0":
+  version: 3.3.0
+  resolution: "@node-kit/extra.fs@npm:3.3.0"
+  checksum: 10/6fbaff179ac53b2bae574180c13afb057be8847f2d06f02c4d495ae6be504d2bc5660285a911ebc3d85bdc1f07a18f56cb8c954c4697b049182c89074a835f1b
+  languageName: node
+  linkType: hard
+
+"@node-kit/yarn-workspace-root@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@node-kit/yarn-workspace-root@npm:3.3.0"
+  dependencies:
+    "@node-kit/extra.fs": "npm:3.3.0"
+    find-up: "npm:^5.0.0"
+    micromatch: "npm:^4.0.5"
+  checksum: 10/a6e3abb670b7e93b6840eaadec9dc5327ef30a8857c7378af39764f3b3a26a1ef060249b5fc33ce2893fc62857746264203fbc522f74f112dcb2df150ab17a1b
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -9234,6 +9252,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "express-server@workspace:apps/express-server"
   dependencies:
+    "@node-kit/yarn-workspace-root": "npm:^3.3.0"
     "@types/connect-redis": "npm:^0.0.23"
     "@types/cors": "npm:^2.8.17"
     "@types/express": "npm:^4.17.17"
@@ -9256,7 +9275,9 @@ __metadata:
     ioredis: "npm:^5.4.1"
     mongodb: "npm:^5.7.0"
     nodemon: "npm:^3.0.2"
+    pkg-dir: "npm:^8.0.0"
     prettier: "npm:^3.0.2"
+    react-front: "npm:*"
     tsx: "npm:^4.19.1"
     typescript: "npm:^5.2.2"
     uuid: "npm:^9.0.0"
@@ -12731,6 +12752,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pkg-dir@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "pkg-dir@npm:8.0.0"
+  dependencies:
+    find-up-simple: "npm:^1.0.0"
+  checksum: 10/e589abebd1b76cbc3669a45df64f63cc1b041fd3a6588b45d4c692207df126f2a67478a804e5beeb729e75efea06cd405fb84445c879e7af346ba46a4a30b1ff
+  languageName: node
+  linkType: hard
+
 "pkg-types@npm:^1.2.0":
   version: 1.2.1
   resolution: "pkg-types@npm:1.2.1"
@@ -13092,7 +13122,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-front@workspace:apps/react-front":
+"react-front@npm:*, react-front@workspace:apps/react-front":
   version: 0.0.0-use.local
   resolution: "react-front@workspace:apps/react-front"
   dependencies:

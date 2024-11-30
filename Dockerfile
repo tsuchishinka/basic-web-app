@@ -1,22 +1,20 @@
-FROM mongo:7.0-jammy
+FROM node:20.11.1-alpine AS base
 
-ENV LANG=ja_JP.UTF-8
-COPY apps/mongo/init_db.js /docker-entrypoint-initdb.d/
-
-RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_20.x  | bash - && apt-get install -y nodejs
-
+FROM base AS builder
 WORKDIR /usr/app
-
+RUN yarn global add turbo
 COPY . .
-RUN cp apps/mongo/init_db.js /docker-entrypoint-initdb.d/
-RUN npm i -g corepack
+RUN turbo prune express-server --docker
+
+FROM base AS installer
+WORKDIR /app
+COPY --from=builder /usr/app/out/json/ .
 RUN corepack enable yarn
 RUN yarn install
-WORKDIR apps/express-server
-RUN yarn build
+COPY --from=builder /usr/app/out/full/ .
+yarn build
+WORKDIR ./apps/express-server
 
-EXPOSE 27017
-EXPOSE 80
 
+# ENTRYPOINT ["tail", "-F", "/dev/null"]
 CMD ["node", "dist/main.js"]

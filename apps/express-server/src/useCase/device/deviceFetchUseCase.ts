@@ -1,10 +1,10 @@
-import DeviceId from '../../domain/device/value/deviceId'
-import COMMON_CONST from '@/common/const'
+import { LIMIT_DEFAULT } from '@/const/common'
 import { ResponseFetchDevices } from '@/controller/device/index.type'
 import Device from '@/domain/device/entity/device'
 import { IDeviceRepository } from '@/domain/device/IDeviceRepository'
 import DeviceName from '@/domain/device/value/deviceName'
 import ModelName from '@/domain/device/value/modelName'
+import DeviceId from '../../domain/device/value/deviceId'
 
 class DeviceFetchUseCase {
   private repository: IDeviceRepository
@@ -26,7 +26,7 @@ class DeviceFetchUseCase {
     searchParams?: { name?: string; model?: string; parentDeviceGroupId?: string },
   ): Promise<ResponseFetchDevices> => {
     const complementedOffset = offset ?? 0
-    const complementedLimit = limit ?? COMMON_CONST.REQUEST_LIMIT_SIZE
+    const complementedLimit = limit ?? LIMIT_DEFAULT
     const deviceName = searchParams?.name ? new DeviceName(searchParams.name) : undefined
     const modelName = searchParams?.model ? new ModelName(searchParams.model) : undefined
     const params = {
