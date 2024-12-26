@@ -33,6 +33,17 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost/app/user
+Content-Type: application/json
+
+{
+    "name": "tsuchida",
+    "mail_address": "tsuchishinka@gmail.com",
+    "password": "j68VmsBW"
+}
+
+###
+
 GET http://localhost:8000/app/user
 ###
 
@@ -45,6 +56,16 @@ GET http://localhost:8000/app/user/31373736323062382d383831
 ###
 
 POST http://localhost:8000/app/
+Content-Type: application/json
+
+{
+    "mail_address": "tsuchishinka@gmail.com",
+    "password": "j68VmsBW"
+}
+
+###
+
+POST http://localhost/app/
 Content-Type: application/json
 
 {
