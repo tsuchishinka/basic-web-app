@@ -52,7 +52,7 @@ export const createDevice: RequestHandler = async (request, response, next) => {
 
 export const deleteDevice: RequestHandler = async (request, response, next) => {
   try {
-    await deviceDeleteUseCase.deleteDevices(request.body.deviceIds)
+    await deviceDeleteUseCase.deleteDevices(request.body.device_ids)
     response.status(200).send('delete succeeded')
   } catch (e) {
     next(e)

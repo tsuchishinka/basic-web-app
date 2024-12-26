@@ -4,12 +4,12 @@ import { RequestFetchUser, RequestFetchUsers, RequestRegisterUser } from './type
 
 const fetchUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { offset, limit, name, mailAddress }: RequestFetchUsers = req.query
+    const { offset, limit, name, mail_address }: RequestFetchUsers = req.query
     const response = await userFetchUseCase.fetchUsers({
       offset,
       limit,
       name,
-      mailAddress,
+      mailAddress: mail_address,
     })
     res.json(response)
   } catch (e) {
@@ -29,8 +29,8 @@ const fetchUser = async (req: Request<RequestFetchUser>, res: Response, next: Ne
 
 const registerUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, mailAddress, password }: RequestRegisterUser = req.body
-    await userRegisterUseCase.registerUser({ name, mailAddress, password })
+    const { name, mail_address, password }: RequestRegisterUser = req.body
+    await userRegisterUseCase.registerUser({ name, mailAddress: mail_address, password })
     res.status(200).send(`User ${name} register succeeded`)
   } catch (e) {
     next(e)

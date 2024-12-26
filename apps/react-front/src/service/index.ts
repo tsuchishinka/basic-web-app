@@ -7,6 +7,7 @@ const axiosClient = new AxiosRequestClient({
 })
 
 const deviceService = new DeviceService(axiosClient)
+
 const loginService = new LoginService(axiosClient)
 
 export { deviceService, loginService }

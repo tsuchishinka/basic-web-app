@@ -5,14 +5,14 @@ import { RequestLogin } from './index.type'
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { mailAddress, password }: RequestLogin = req.body
+    const { mail_address, password }: RequestLogin = req.body
 
     const loginCallback = () => {
       req.session.login = true
     }
     await authUseCase.login(
       {
-        mailAddress,
+        mailAddress: mail_address,
         password,
       },
       loginCallback,

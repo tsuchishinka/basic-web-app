@@ -27,7 +27,7 @@ Content-Type: application/json
 
 {
     "name": "tsuchida",
-    "mailAddress": "tsuchishinka@gmail.com",
+    "mail_address": "tsuchishinka@gmail.com",
     "password": "j68VmsBW"
 }
 
@@ -48,7 +48,7 @@ POST http://localhost:8000/app/
 Content-Type: application/json
 
 {
-    "mailAddress": "tsuchishinka@gmail.com",
+    "mail_address": "tsuchishinka@gmail.com",
     "password": "j68VmsBW"
 }
 
@@ -77,6 +77,6 @@ DELETE  http://localhost:8000/app/device
 Content-Type: application/json
 
 {
-    "deviceIds": ["65a5522b6b401bc743abf311"]
+    "device_ids": ["65a5522b6b401bc743abf311"]
 }
 ###

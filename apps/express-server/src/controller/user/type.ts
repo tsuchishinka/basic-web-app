@@ -2,7 +2,7 @@ type RequestFetchUsers = {
   offset?: number
   limit?: number
   name?: string
-  mailAddress?: string
+  mail_address?: string
 }
 
 type ResponseFetchUsers = {
@@ -26,7 +26,7 @@ type ResponseFetchUser = {
 
 type RequestRegisterUser = {
   name: string
-  mailAddress: string
+  mail_address: string
   password: string
 }
 

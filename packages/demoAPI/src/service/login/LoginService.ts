@@ -10,7 +10,7 @@ class LoginService extends LoginRequestClient {
       contentType: "application/json",
       headers: "Content-type: application/json; charset=utf8",
       data: {
-        name: params.email,
+        mailAddress: params.email,
         password: params.password,
       },
     });
