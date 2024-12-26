@@ -1,47 +1,52 @@
-import DeviceDescription from '../value/description'
-import DeviceId from '../value/deviceId'
-import DeviceName from '../value/deviceName'
-import ModelName from '../value/modelName'
+import { Description } from '@/domain/common/value/description'
+import { DeviceId } from '../value/deviceId'
+import { DeviceName } from '../value/deviceName'
+import { Model } from '../value/model'
 
 class Device {
   private _id: DeviceId
   private _name: DeviceName
-  private _modelName: ModelName
-  private _description: DeviceDescription
-  constructor(
-    deviceId: DeviceId,
-    deviceName?: DeviceName,
-    modelName?: ModelName,
-    description?: DeviceDescription,
-  ) {
+  private _model: Model
+  private _description: Description
+  constructor({
+    deviceId,
+    deviceName,
+    model,
+    description,
+  }: {
+    deviceId: DeviceId
+    deviceName: DeviceName
+    model: Model
+    description: Description
+  }) {
     this._id = deviceId
-    this._name = deviceName ?? new DeviceName('')
-    this._modelName = modelName ?? new ModelName('')
-    this._description = description ?? new DeviceDescription('')
-  }
-
-  changeName = (name: DeviceName) => {
-    this._name = name
-  }
-
-  changeModelName = (modelName: ModelName) => {
-    this._modelName = modelName
-  }
-
-  changeDescription = (description: DeviceDescription) => {
+    this._name = deviceName
+    this._model = model
     this._description = description
   }
 
-  get name() {
-    return this._name
+  updateName(name: DeviceName) {
+    this._name = name
+  }
+
+  updateModel(model: Model) {
+    this._model = model
+  }
+
+  updateDescription(description: Description) {
+    this._description = description
   }
 
   get id() {
     return this._id
   }
 
-  get modelName() {
-    return this._modelName
+  get name() {
+    return this._name
+  }
+
+  get model() {
+    return this._model
   }
 
   get description() {
@@ -49,4 +54,4 @@ class Device {
   }
 }
 
-export default Device
+export { Device }

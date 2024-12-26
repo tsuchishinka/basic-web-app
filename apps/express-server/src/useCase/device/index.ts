@@ -1,16 +1,15 @@
-import DeviceDeleteUseCase from './deviceDeleteUseCase'
-import DeviceFetchUseCase from './deviceFetchUseCase'
-import DeviceRegisterUseCase from './deviceRegisterUseCase'
-import DeviceUpdateUseCase from './deviceUpdateUseCase'
-import MongoDeviceFactory from '@/domain/device/factory/deviceFactory'
-import MongoDeviceRepositories from '@/repository/device/mongoDeviceRepository'
+import { SQLiteDeviceRepository } from '@/repository/sqlite/sqliteDeviceRepository'
+import { DeviceDeleteUseCase } from './deviceDeleteUseCase'
+import { DeviceQueryUseCase } from './deviceQueryUseCase'
+import { DeviceRegisterUseCase } from './deviceRegisterUseCase'
+import { DeviceUpdateUseCase } from './deviceUpdateUseCase'
 
-const mongoDeviceRepository = new MongoDeviceRepositories()
-const deviceFactory = new MongoDeviceFactory()
+// const mongoDeviceRepository = new MongoDeviceRepositories()
+const sqliteDeviceRepository = new SQLiteDeviceRepository()
 
-const deviceFetchUseCase = new DeviceFetchUseCase(mongoDeviceRepository)
-const deviceDeleteUseCase = new DeviceDeleteUseCase(mongoDeviceRepository)
-const deviceRegisterUseCase = new DeviceRegisterUseCase(mongoDeviceRepository, deviceFactory)
-const deviceUpdateUseCase = new DeviceUpdateUseCase(mongoDeviceRepository)
+const deviceFetchUseCase = new DeviceQueryUseCase(sqliteDeviceRepository)
+const deviceDeleteUseCase = new DeviceDeleteUseCase(sqliteDeviceRepository)
+const deviceRegisterUseCase = new DeviceRegisterUseCase(sqliteDeviceRepository)
+const deviceUpdateUseCase = new DeviceUpdateUseCase(sqliteDeviceRepository)
 
-export { deviceFetchUseCase, deviceDeleteUseCase, deviceRegisterUseCase, deviceUpdateUseCase }
+export { deviceDeleteUseCase, deviceFetchUseCase, deviceRegisterUseCase, deviceUpdateUseCase }

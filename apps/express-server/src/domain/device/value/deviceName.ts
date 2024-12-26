@@ -1,19 +1,17 @@
-import DeviceConst from '../const'
+import { DEVICE_NAME_MAX_LENGTH } from '@/const/device'
+import { DeviceValidationError } from '@/errors/device'
 
 class DeviceName {
-  private readonly _value: string
-  constructor(value: string) {
-    if (value === null || value === undefined) {
-      throw new Error(DeviceConst.modelName.NULL_INVALID_MESSAGE)
+  readonly value: string
+  constructor(name: string) {
+    if (name === null || name === undefined || name.trim() === '') {
+      throw new DeviceValidationError('device name is empty')
     }
-    if (value.length >= DeviceConst.deviceName.MAX_LENGTH) {
-      throw new Error(DeviceConst.deviceName.MAX_LENGTH_MESSAGE)
+    if (name.length >= DEVICE_NAME_MAX_LENGTH) {
+      throw new DeviceValidationError('device name is over max text length')
     }
-    this._value = value
-  }
-  get value() {
-    return this._value
+    this.value = name
   }
 }
 
-export default DeviceName
+export { DeviceName }

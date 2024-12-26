@@ -1,21 +1,12 @@
-import User from './entity/user'
-import UserName from './value/userName'
+import { User } from './entity/user'
+import { MailAddress } from './value/mailAddress'
+import { UserId } from './value/userId'
 
-export interface IUserRepository {
-  // update: (user: User) => void
+interface IUserRepository {
+  update?: (user: User) => void
   registerUser: (user: User) => void
-  fetchUsers: (
-    offset: number,
-    limit: number,
-    params?: {
-      userName?: UserName
-    },
-  ) => Promise<{
-    offset: number
-    total: number
-    pageCount: number
-    list: User[]
-  }>
-  fetchUser: (userId: string) => Promise<User | undefined>
-  // delete: (users: User[]) => void
+  fetchUser: (params: { userId?: UserId; mailAddress?: MailAddress }) => Promise<User | undefined>
+  delete?: (users: User[]) => void
 }
+
+export type { IUserRepository }

@@ -1,18 +1,17 @@
-import IDeviceFactory from '@/domain/device/factory/IDeviceFactory'
-import { IDeviceRepository } from '@/domain/device/IDeviceRepository'
+import { EMPTY_ID } from '@/const/common'
+import { IDeviceRepository } from '@/domain/device/deviceRepository'
+import { createDevice } from '@/domain/device/factory/createDevice'
 
 class DeviceRegisterUseCase {
   private repository: IDeviceRepository
-  private factory: IDeviceFactory
-  constructor(repository: IDeviceRepository, factory: IDeviceFactory) {
+  constructor(repository: IDeviceRepository) {
     this.repository = repository
-    this.factory = factory
   }
 
-  registerDevice = async (name: string, modelName: string, description?: string) => {
-    const device = this.factory.createDevice(name, modelName, description)
+  registerDevice = async (name: string, model: string, description?: string) => {
+    const device = createDevice({ id: EMPTY_ID, name, model, description })
     await this.repository.registerDevice(device)
   }
 }
 
-export default DeviceRegisterUseCase
+export { DeviceRegisterUseCase }

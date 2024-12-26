@@ -1,6 +1,6 @@
-import AuthUseCase from './authUseCase'
-import MongoUserRepository from '@/repository/user/mongoUserRepository'
+import { SQLiteUserRepository } from '@/repository/sqlite/sqliteUserRepository'
+import { AuthUseCase } from './authUseCase'
 
-const authUseCase = new AuthUseCase(new MongoUserRepository())
+const authUseCase = new AuthUseCase(new SQLiteUserRepository())
 
 export { authUseCase }

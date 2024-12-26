@@ -14,4 +14,4 @@ const fetchAll = async <T>(
   return stackedList
 }
 
-export default fetchAll
+export { fetchAll }

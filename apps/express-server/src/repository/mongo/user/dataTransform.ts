@@ -1,8 +1,10 @@
+import { User } from '@/domain/user/entity/user'
+import { MailAddress } from '@/domain/user/value/mailAddress'
+import { Password } from '@/domain/user/value/password'
+import { UserId } from '@/domain/user/value/userId'
+import { UserName } from '@/domain/user/value/userName'
 import { ObjectId, WithId } from 'mongodb'
 import { UserCollectionFields } from './UserCollectionField'
-import User from '@/domain/user/entity/user'
-import Password from '@/domain/user/value/password'
-import UserName from '@/domain/user/value/userName'
 
 const toUserCollectionSearchParams = (params?: { userName?: UserName }) => {
   let collectionParams = {}
@@ -23,18 +25,21 @@ const toUser = (collectionData: WithId<UserCollectionFields> | null): User | und
     return undefined
   }
 
+  const userId = new UserId(collectionData._id.toString())
   const userName = new UserName(collectionData.name)
+  const mailAddress = new MailAddress(collectionData.mailAddress)
   const password = new Password(collectionData.password, collectionData.passwordSalt)
-  return new User(collectionData._id.toString(), userName, password)
+  return new User(userId, userName, mailAddress, password)
 }
 
 const toCollectionData = (user: User): UserCollectionFields => {
   return {
-    _id: new ObjectId(user.id),
+    _id: new ObjectId(user.id.value),
     name: user.name.value,
     password: user.password.encrypt(),
+    mailAddress: user.mailAddress.value,
     passwordSalt: user.password.salt,
   }
 }
 
-export { toUserCollectionSearchParams, toUser, toCollectionData }
+export { toCollectionData, toUser, toUserCollectionSearchParams }

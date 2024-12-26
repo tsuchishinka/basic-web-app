@@ -1,19 +1,28 @@
-import IUserFactory from '@/domain/user/factory/IUserFactory'
+import { createUser } from '@/domain/user/factory/createUser'
 import { IUserRepository } from '@/domain/user/IUserRepository'
+import { UserService } from '@/domain/user/service/userService'
+import { UserDuplicateError } from '@/errors/user'
 
 class UserRegisterUseCase {
   private repository: IUserRepository
-  private factory: IUserFactory
+  private userService: UserService
 
-  constructor(repository: IUserRepository, factory: IUserFactory) {
+  constructor(repository: IUserRepository) {
     this.repository = repository
-    this.factory = factory
+    this.userService = new UserService(repository)
   }
 
-  registerUser = async (name: string, password: string): Promise<void> => {
-    const user = this.factory.createUser(name, password)
+  registerUser = async (params: {
+    name: string
+    mailAddress: string
+    password: string
+  }): Promise<void> => {
+    const user = createUser(params)
+    if (await this.userService.exist(user.mailAddress)) {
+      throw new UserDuplicateError('Already exist user')
+    }
     await this.repository.registerUser(user)
   }
 }
 
-export default UserRegisterUseCase
+export { UserRegisterUseCase }

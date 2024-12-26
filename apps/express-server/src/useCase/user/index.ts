@@ -1,12 +1,11 @@
-import UserFetchUseCase from './userFetchUseCase'
-import UserRegisterUseCase from './userRegisterUseCase'
-import UserFactory from '@/domain/user/factory/userFactory'
-import MongoUserRepository from '@/repository/user/mongoUserRepository'
+import { SQLiteUserRepository } from '@/repository/sqlite/sqliteUserRepository'
+import { UserFetchUseCase } from './userFetchUseCase'
+import { UserRegisterUseCase } from './userRegisterUseCase'
 
-const mongoUserRepository = new MongoUserRepository()
-const userFactory = new UserFactory()
+// const mongoUserRepository = new MongoUserRepository()
+const sqliteUserRepository = new SQLiteUserRepository()
 
-const userFetchUseCase = new UserFetchUseCase(mongoUserRepository)
-const userRegisterUseCase = new UserRegisterUseCase(mongoUserRepository, userFactory)
+const userFetchUseCase = new UserFetchUseCase(sqliteUserRepository)
+const userRegisterUseCase = new UserRegisterUseCase(sqliteUserRepository)
 
 export { userFetchUseCase, userRegisterUseCase }

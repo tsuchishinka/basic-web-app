@@ -24,4 +24,4 @@ sessionRouter.use(
   }),
 )
 
-export default sessionRouter
+export { sessionRouter }

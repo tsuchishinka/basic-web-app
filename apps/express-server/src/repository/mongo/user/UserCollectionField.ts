@@ -5,6 +5,7 @@ type UserCollectionFields = {
   name: string
   password: string
   passwordSalt: string
+  mailAddress: string
 }
 
 export type { UserCollectionFields }

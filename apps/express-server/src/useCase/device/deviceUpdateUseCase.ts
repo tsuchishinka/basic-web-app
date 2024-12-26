@@ -1,8 +1,9 @@
-import { IDeviceRepository } from '@/domain/device/IDeviceRepository'
-import DeviceDescription from '@/domain/device/value/description'
-import DeviceId from '@/domain/device/value/deviceId'
-import DeviceName from '@/domain/device/value/deviceName'
-import ModelName from '@/domain/device/value/modelName'
+import { Description } from '@/domain/common/value/description'
+import { IDeviceRepository } from '@/domain/device/deviceRepository'
+import { DeviceId } from '@/domain/device/value/deviceId'
+import { DeviceName } from '@/domain/device/value/deviceName'
+import { Model } from '@/domain/device/value/model'
+import { DeviceNotFoundError } from '@/errors/device'
 
 class DeviceUpdateUseCase {
   private repository: IDeviceRepository
@@ -13,20 +14,20 @@ class DeviceUpdateUseCase {
     const device = await this.repository.fetchDevice(new DeviceId(id))
     if (device === undefined) {
       // TODO: エラー処理を書く
-      return
+      throw new DeviceNotFoundError('device not found')
     }
 
     if (name) {
-      device.changeName(new DeviceName(name))
+      device.updateName(new DeviceName(name))
     }
     if (model) {
-      device.changeModelName(new ModelName(model))
+      device.updateModel(new Model(model))
     }
     if (description) {
-      device.changeDescription(new DeviceDescription(description))
+      device.updateDescription(new Description(description))
     }
     return this.repository.updateDevice(device)
   }
 }
 
-export default DeviceUpdateUseCase
+export { DeviceUpdateUseCase }

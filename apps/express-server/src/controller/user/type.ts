@@ -2,6 +2,7 @@ type RequestFetchUsers = {
   offset?: number
   limit?: number
   name?: string
+  mailAddress?: string
 }
 
 type ResponseFetchUsers = {
@@ -25,13 +26,14 @@ type ResponseFetchUser = {
 
 type RequestRegisterUser = {
   name: string
+  mailAddress: string
   password: string
 }
 
 export type {
-  RequestFetchUsers,
   RequestFetchUser,
-  ResponseFetchUsers,
-  ResponseFetchUser,
+  RequestFetchUsers,
   RequestRegisterUser,
+  ResponseFetchUser,
+  ResponseFetchUsers,
 }

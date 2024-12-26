@@ -1,6 +1,6 @@
-import express from 'express'
-import { fetchDevices, createDevice, deleteDevice, fetchDevice } from '../controller/device'
 import { checkSession } from '@/controller/auth'
+import express from 'express'
+import { createDevice, deleteDevice, fetchDevice, fetchDevices } from '../controller/device'
 
 const router = express.Router()
 
@@ -14,4 +14,4 @@ router.post('/', createDevice)
 
 router.delete('/', deleteDevice)
 
-export default router
+export { router as deviceRouter }

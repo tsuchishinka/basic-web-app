@@ -10,4 +10,4 @@ corsRouter.use(
   }),
 )
 
-export default corsRouter
+export { corsRouter }

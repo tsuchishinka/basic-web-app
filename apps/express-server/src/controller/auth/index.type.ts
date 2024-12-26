@@ -1,5 +1,5 @@
 type RequestLogin = {
-  name: string
+  mailAddress: string
   password: string
 }
 

@@ -1,23 +1,18 @@
-import { RequestHandler } from 'express'
-import { RequestFetchDevices } from './index.type'
 import {
+  deviceDeleteUseCase,
   deviceFetchUseCase,
   deviceRegisterUseCase,
-  deviceDeleteUseCase,
   deviceUpdateUseCase,
 } from '@/useCase/device'
+import { RequestHandler } from 'express'
+import { RequestFetchDevices } from './type'
 
-export const fetchDevices: RequestHandler = async (request, response, next) => {
+export const fetchDevices: RequestHandler = async (req, res, next) => {
   try {
-    const { offset, limit, name, model }: RequestFetchDevices = request.query
-    const params = { name, model }
-    const responseUseCase = await deviceFetchUseCase.fetchDevices(
-      Number(offset),
-      Number(limit),
-      params,
-    )
+    const { offset, limit, name, model }: RequestFetchDevices = req.query
+    const responseUseCase = await deviceFetchUseCase.fetchDevices({ offset, limit, name, model })
 
-    response.json(responseUseCase)
+    res.json(responseUseCase)
   } catch (e) {
     next(e)
   }
@@ -30,13 +25,7 @@ export const fetchDevice: RequestHandler = async (request, response, next) => {
     }
 
     const device = await deviceFetchUseCase.fetchDevice(request.params.id)
-
-    response.json({
-      deviceId: device.id.value,
-      name: device.name.value,
-      modelName: device.modelName.value,
-      description: device.description.value,
-    })
+    response.json(device)
   } catch (e) {
     next(e)
   }
@@ -66,7 +55,6 @@ export const deleteDevice: RequestHandler = async (request, response, next) => {
     await deviceDeleteUseCase.deleteDevices(request.body.deviceIds)
     response.status(200).send('delete succeeded')
   } catch (e) {
-    response.status(500).send('delete failed')
     next(e)
   }
 }
@@ -81,7 +69,6 @@ export const patchDevice: RequestHandler = async (request, response, next) => {
     )
     response.json(result)
   } catch (e) {
-    response.status(500).send('delete failed')
     next(e)
   }
 }

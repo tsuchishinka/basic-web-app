@@ -1,0 +1,14 @@
+{
+  "name": "practice",
+  "packageManager": "yarn@4.3.1",
+  "scripts": {
+    "dev": "tsx src/main.ts"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "tsc": "^2.0.4",
+    "tsx": "^4.19.2"
+  }
+}

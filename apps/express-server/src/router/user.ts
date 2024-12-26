@@ -1,6 +1,6 @@
-import express from 'express'
 import { checkSession } from '@/controller/auth'
 import { fetchUser, fetchUsers, registerUser } from '@/controller/user'
+import express from 'express'
 
 const userRouter = express.Router()
 
@@ -10,4 +10,4 @@ userRouter.use(checkSession)
 userRouter.get('/', fetchUsers)
 userRouter.get('/:id', fetchUser)
 
-export default userRouter
+export { userRouter }

@@ -1,16 +1,13 @@
-import DeviceConst from '../const'
+import { EMPTY_ID } from '@/const/common'
 
 class DeviceId {
-  private readonly _value: string
-  constructor(value: string) {
-    if (value === null) {
-      throw new Error(DeviceConst.deviceId.NULL_INVALID_MESSAGE)
-    }
-    this._value = value
+  readonly value: string
+  constructor(id: string) {
+    this.value = id
   }
-  get value() {
-    return this._value
+  isEmpty() {
+    return this.value === EMPTY_ID
   }
 }
 
-export default DeviceId
+export { DeviceId }

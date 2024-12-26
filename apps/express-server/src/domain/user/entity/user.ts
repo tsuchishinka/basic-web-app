@@ -1,13 +1,17 @@
-import Password from '../value/password'
-import UserName from '../value/userName'
+import { MailAddress } from '../value/mailAddress'
+import { Password } from '../value/password'
+import { UserId } from '../value/userId'
+import { UserName } from '../value/userName'
 
 class User {
-  readonly id: string
+  readonly id: UserId
   private _name: UserName
+  private _mailAddress: MailAddress
   private _password: Password
-  constructor(id: string, userName: UserName, password: Password) {
+  constructor(id: UserId, userName: UserName, mailAddress: MailAddress, password: Password) {
     this.id = id
     this._name = userName
+    this._mailAddress = mailAddress
     this._password = password
   }
 
@@ -26,6 +30,10 @@ class User {
   get password() {
     return this._password
   }
+
+  get mailAddress() {
+    return this._mailAddress
+  }
 }
 
-export default User
+export { User }
