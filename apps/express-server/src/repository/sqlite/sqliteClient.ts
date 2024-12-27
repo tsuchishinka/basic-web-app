@@ -4,7 +4,7 @@ const db = new Database('basic-web-app.db')
 
 db.serialize(async () => {
   db.run(
-    `CREATE TABLE device (
+    `CREATE TABLE IF NOT EXISTS device  (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name VARCHAR(60) NOT NULL,
         model VARCHAR(60) NOT NULL,
@@ -12,7 +12,7 @@ db.serialize(async () => {
     );`,
   )
   db.run(`
-    CREATE TABLE user (
+    CREATE TABLE IF NOT EXISTS user (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name VARCHAR(60) NOT NULL,
       mailAddress VARCHAR(120) NOT NULL,

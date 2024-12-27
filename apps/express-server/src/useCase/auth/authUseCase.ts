@@ -12,13 +12,13 @@ class AuthUseCase {
     this.userService = new UserService(this.repository)
   }
 
-  async login(params: { mailAddress: string; password: string }, loginCallback: () => void) {
+  async login(params: { mailAddress: string; password: string }) {
     const mailAddress = new MailAddress(params.mailAddress)
     const password = new Password(params.password, '')
     if (!(await this.userService.authenticate(mailAddress, password))) {
       throw new Error('Authenticate failed')
     }
-    loginCallback()
+    return { result: 'sucess' }
   }
 }
 

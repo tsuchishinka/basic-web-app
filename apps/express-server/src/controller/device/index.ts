@@ -11,7 +11,6 @@ export const fetchDevices: RequestHandler = async (req, res, next) => {
   try {
     const { offset, limit, name, model }: RequestFetchDevices = req.query
     const responseUseCase = await deviceFetchUseCase.fetchDevices({ offset, limit, name, model })
-
     res.json(responseUseCase)
   } catch (e) {
     next(e)
@@ -20,10 +19,6 @@ export const fetchDevices: RequestHandler = async (req, res, next) => {
 
 export const fetchDevice: RequestHandler = async (request, response, next) => {
   try {
-    if (request.params.id === undefined) {
-      return response.status(400).send('Not include ID')
-    }
-
     const device = await deviceFetchUseCase.fetchDevice(request.params.id)
     response.json(device)
   } catch (e) {
@@ -32,12 +27,6 @@ export const fetchDevice: RequestHandler = async (request, response, next) => {
 }
 
 export const createDevice: RequestHandler = async (request, response, next) => {
-  if (request.body.name === undefined) {
-    return response.status(400).send('Not include ID')
-  }
-  if (request.body.model === undefined) {
-    return response.status(400).send('Not include ID')
-  }
   try {
     const result = await deviceRegisterUseCase.registerDevice(
       request.body.name,
