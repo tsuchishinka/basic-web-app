@@ -1,14 +1,23 @@
-import React, { useCallback, useEffect } from 'react'
-import { useState } from 'react'
+import { deviceService } from '@/service'
+import { RootState } from '@/store'
+import {
+  Button,
+  Table,
+  TableBody,
+  TableBodyData,
+  TableBodyRow,
+  TableHeader,
+  TableHeaderData,
+  TableHeaderRow,
+  TextInput,
+} from '@packages/ui-library'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Button, TextInput, SimpleTable } from '@packages/ui-library'
 import { useSelector } from 'react-redux/es/hooks/useSelector'
 import fetchDevices from '../../controller/actions/fetchDevices'
 import searchDevices from '../../controller/actions/searchDevices'
 import { updateDevicePageState } from '../../controller/slice'
 import styles from './index.module.scss'
-import { deviceService } from '@/service'
-import { RootState } from '@/store'
 
 const _DeviceView = () => {
   const [searchWords, setSearchWords] = useState('')
@@ -39,7 +48,7 @@ const _DeviceView = () => {
   })
 
   return (
-    <>
+    <div className={styles['device-view']}>
       <div className={styles['search-form']}>
         <div style={{ width: '30rem' }}>
           <TextInput value={searchWords} onChange={onChange} />
@@ -49,9 +58,26 @@ const _DeviceView = () => {
         </Button>
       </div>
       <div className={styles.list}>
-        <SimpleTable headerList={['モデル', '名前']} list={tableList} />
+        <Table columnWidthList={[]}>
+          <TableHeader>
+            <TableHeaderRow>
+              <TableHeaderData>デバイス名</TableHeaderData>
+              <TableHeaderData>モデル</TableHeaderData>
+            </TableHeaderRow>
+          </TableHeader>
+          <TableBody>
+            {tableList.map(([model, name]) => {
+              return (
+                <TableBodyRow>
+                  <TableBodyData>{name}</TableBodyData>
+                  <TableBodyData>{model}</TableBodyData>
+                </TableBodyRow>
+              )
+            })}
+          </TableBody>
+        </Table>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -15,8 +15,8 @@ POST http://localhost:8000/app/device
 Content-Type: application/json
 
 {
-    "name": "tsuchida80d0",
-    "model": "CC2L",
+    "name": "tsuchida80dfd0",
+    "model": "CCfdf2L",
     "description": "新しい"
 }
 
@@ -26,8 +26,8 @@ POST https://basic-web-app-z1i9.onrender.com/app/device
 Content-Type: application/json
 
 {
-    "name": "devic2323e2332",
-    "model": "CC23323223L2",
+    "name": "de232fd3",
+    "model": "CCfd2",
     "description": "新しい"
 }
 
@@ -89,8 +89,8 @@ POST https://basic-web-app-z1i9.onrender.com/app/
 Content-Type: application/json
 
 {
-    "mail_address": "tsuchishinka@gmail.com",
-    "password": "j68VmsBW"
+    "mail_address": "test@example.com",
+    "password": "password"
 }
 
 ###
