@@ -22,6 +22,17 @@ Content-Type: application/json
 
 ###
 
+POST https://basic-web-app-z1i9.onrender.com/app/device
+Content-Type: application/json
+
+{
+    "name": "devic2323e2332",
+    "model": "CC23323223L2",
+    "description": "新しい"
+}
+
+###
+
 POST http://localhost:8000/app/user
 Content-Type: application/json
 
@@ -33,13 +44,13 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost/app/user
+POST https://basic-web-app-z1i9.onrender.com/app/user
 Content-Type: application/json
 
 {
-    "name": "tsuchida",
-    "mail_address": "tsuchishinka@gmail.com",
-    "password": "j68VmsBW"
+    "name": "test",
+    "mail_address": "test@example.com",
+    "password": "password"
 }
 
 ###
@@ -66,6 +77,15 @@ Content-Type: application/json
 ###
 
 POST http://localhost/app/
+Content-Type: application/json
+
+{
+    "mail_address": "tsuchishinka@gmail.com",
+    "password": "j68VmsBW"
+}
+###
+
+POST https://basic-web-app-z1i9.onrender.com/app/
 Content-Type: application/json
 
 {

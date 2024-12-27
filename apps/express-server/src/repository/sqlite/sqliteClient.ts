@@ -1,6 +1,6 @@
 import { Database } from 'sqlite3'
 
-const db = new Database(':memory:')
+const db = new Database('basic-web-app.db')
 
 db.serialize(async () => {
   db.run(

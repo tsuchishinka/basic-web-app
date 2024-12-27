@@ -43,3 +43,5 @@ yarn-error.log*
 install-state.gz
 
 test
+
+*.db
