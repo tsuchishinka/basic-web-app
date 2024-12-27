@@ -1,6 +1,6 @@
 import { CustomError } from '.'
 
-class AuthentificateError extends CustomError {
+class AuthentificError extends CustomError {
   code: 401
   constructor(message: string) {
     super(message)
@@ -8,4 +8,4 @@ class AuthentificateError extends CustomError {
   }
 }
 
-export { AuthentificateError }
+export { AuthentificError }

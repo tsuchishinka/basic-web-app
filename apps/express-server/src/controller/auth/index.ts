@@ -1,4 +1,4 @@
-import { AuthentificateError } from '@/errors/auth'
+import { AuthentificError } from '@/errors/auth'
 import { authUseCase } from '@/useCase/auth'
 import { NextFunction, Request, Response } from 'express'
 import { RequestLogin } from './type'
@@ -21,7 +21,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 const checkSession = (req: Request, res: Response, next: NextFunction) => {
   if (req.session.login === undefined) {
-    next(new AuthentificateError('Authenticate failed'))
+    next(new AuthentificError('Authenticate failed'))
   }
   next()
 }

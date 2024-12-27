@@ -26,8 +26,8 @@ POST https://basic-web-app-z1i9.onrender.com/app/device
 Content-Type: application/json
 
 {
-    "name": "de232fd3",
-    "model": "CCfd2",
+    "name": "国立競技場",
+    "model": "SafiePocket2",
     "description": "新しい"
 }
 
