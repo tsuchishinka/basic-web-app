@@ -46,4 +46,4 @@ const execute = async () => {
   db.exec;
 };
 
-export { execute };
+export default execute;

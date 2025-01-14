@@ -5,7 +5,8 @@
     "dev": "tsx src/main.ts"
   },
   "dependencies": {
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "typescript": "^5.7.3"
   },
   "devDependencies": {
     "tsc": "^2.0.4",

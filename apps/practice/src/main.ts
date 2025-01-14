@@ -1,4 +1,4 @@
-import { execute } from "./sqlite";
+import sqlitePracticeExecute from "./sqlite";
 
-execute();
+sqlitePracticeExecute();
 // executeError();
