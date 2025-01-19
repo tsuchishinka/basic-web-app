@@ -170,13 +170,7 @@ const Map = () => {
       if (x < 0 || y < 0 || x > maxTile || y > maxTile) {
         continue;
       }
-      if (
-        currentTiles.find((currentTile) => {
-          return (
-            currentTile.x === x && currentTile.y === y && currentTile.z === z
-          );
-        })
-      ) {
+      if (currentTiles.find((t) => t.x === x && t.y === y && t.z === z)) {
         continue;
       }
       const image = document.createElement("img");
