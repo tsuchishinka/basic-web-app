@@ -1,195 +1,35 @@
 import { useEffect, useRef, WheelEvent } from "react";
 
-const CANVAS_WIDTH = 1600;
-const CANVAS_HEIGHT = 800;
+const CANVAS_WIDTH = 1000;
+const CANVAS_HEIGHT = 1000;
 
-const offsetWorldPos = {
-  x: 0,
-  y: 0,
+const worldPos = {
+  x: 0.85,
+  y: 0.39,
 };
-let zoom = 400;
+let rate = 0.00005;
 
 // eslint-disable-next-line
 const displayLog = (name: string, value: any) => {
   console.log(`${name}: ${JSON.stringify(value)}`);
 };
 
-let level = 2;
-
-const imageCaches: {
-  image: HTMLImageElement;
-  urlInfo: URLInfo;
-}[] = [];
-
-const getTileLength = () => {
-  return zoom / Math.pow(2, level);
-};
-
-const getTopLeftTileInfo = (): TileInfo => {
-  const tileLength = getTileLength();
-  const x = Math.floor(offsetWorldPos.x * Math.pow(2, level));
-  const y = Math.floor(offsetWorldPos.y * Math.pow(2, level));
-
-  const topLeftVertex = {
-    x: x > 0 ? x * zoom : -x * zoom,
-    y: y > 0 ? y * zoom : -y * zoom,
-  };
-  const bottomRightVertex = {
-    x: topLeftVertex.x + tileLength - 1,
-    y: topLeftVertex.y + tileLength - 1,
-  };
-
-  return {
-    topLeftVertex,
-    bottomRightVertex,
-    urlInfo: {
-      x: Math.max(Math.min(Math.pow(2, level) - 1, x), 0),
-      y: Math.max(Math.min(Math.pow(2, level) - 1, y), 0),
-      z: level,
-    },
-  };
-};
-
-type TilePos = {
-  topLeftVertex: {
-    x: number;
-    y: number;
-  };
-  bottomRightVertex: {
-    x: number;
-    y: number;
-  };
-};
-
-type TileInfo = TilePos & {
-  urlInfo: URLInfo;
-};
-
-type Tile = TileInfo & {
-  image: HTMLImageElement | undefined;
-};
-
-type URLInfo = {
+type Tile = {
   x: number;
   y: number;
   z: number;
 };
 
-const isEqualURLInfo = (url1: URLInfo, url2: URLInfo) => {
-  return url1.x === url2.x && url1.y === url2.y && url1.z === url2.z;
+type Position = {
+  x: number;
+  y: number;
 };
 
-let isRequesting = false;
 const TILE_URL = "https://tile.openstreetmap.org";
 
-const fetchImage = async (urlInfo: URLInfo) => {
-  const x = urlInfo.x;
-  const y = urlInfo.y;
-  const z = urlInfo.z;
-
-  if (isRequesting) {
-    return;
-  }
-  isRequesting = true;
-  const img = document.createElement("img");
-  try {
-    img.src = `${TILE_URL}/${z}/${x}/${y}.png`;
-    await img.decode();
-  } catch {
-    console.error(`Failed to load image: ${TILE_URL}/${z}/${x}/${y}.png`);
-    img.src = "";
-  }
-  isRequesting = false;
-  return img;
-};
-
-const imageRequestQueue: URLInfo[] = [];
-
-const makeTiles = () => {
-  const topLeftTile = getTopLeftTileInfo();
-  displayLog("topLeftTile", topLeftTile);
-  const tileLength = getTileLength();
-  displayLog("tileLength", tileLength);
-  const rowTileNum = (zoom > CANVAS_HEIGHT ? CANVAS_HEIGHT : zoom) / tileLength;
-  const columnTileNum =
-    (zoom > CANVAS_WIDTH ? CANVAS_WIDTH : zoom) / tileLength;
-
-  displayLog("row, column", { row: rowTileNum, column: columnTileNum });
-  const tiles: Tile[] = [];
-
-  for (let i = 0; i < rowTileNum; i++) {
-    for (let j = 0; j < columnTileNum; j++) {
-      if (
-        topLeftTile.urlInfo.x + j > Math.pow(2, level) - 1 ||
-        topLeftTile.urlInfo.y + i > Math.pow(2, level) - 1
-      ) {
-        continue;
-      }
-      const urlInfo = {
-        x: topLeftTile.urlInfo.x + j,
-        y: topLeftTile.urlInfo.y + i,
-        z: level,
-      };
-
-      const image = imageCaches.find((imageCache) => {
-        return isEqualURLInfo(imageCache.urlInfo, urlInfo);
-      })?.image;
-
-      if (image === undefined) {
-        imageRequestQueue.push(urlInfo);
-      }
-
-      const tile: Tile = {
-        topLeftVertex: {
-          x: topLeftTile.topLeftVertex.x + j * tileLength,
-          y: topLeftTile.topLeftVertex.y + i * tileLength,
-        },
-        bottomRightVertex: {
-          x: topLeftTile.bottomRightVertex.x + j * tileLength,
-          y: topLeftTile.bottomRightVertex.y + i * tileLength,
-        },
-        urlInfo,
-        image,
-      };
-      tiles.push(tile);
-    }
-  }
-  displayLog("tiles", tiles);
-  return tiles;
-};
-
-const drawTiles = (ctx: CanvasRenderingContext2D, tiles: Tile[]) => {
-  for (const tile of tiles) {
-    const image = tile.image;
-    displayLog("image tile", tile);
-    displayLog("image", image);
-    const tileLength = getTileLength();
-    if (image) {
-      ctx.drawImage(
-        image,
-        tile.topLeftVertex.x,
-        tile.topLeftVertex.y,
-        tileLength,
-        tileLength
-      );
-      ctx.strokeRect(
-        tile.topLeftVertex.x,
-        tile.topLeftVertex.y,
-        tileLength,
-        tileLength
-      );
-      ctx.font = "20px serif";
-      ctx.fillStyle = "rgb(255, 0, 0)";
-      const text = `${tile.urlInfo.x}/${tile.urlInfo.y}/${tile.urlInfo.z}`;
-      ctx.fillText(
-        text,
-        (tile.topLeftVertex.x + tile.bottomRightVertex.x) / 2 -
-          (text.length * 20) / 4,
-        (tile.topLeftVertex.y + tile.bottomRightVertex.y) / 2
-      );
-    }
-  }
-};
+let currentTiles: (Tile & {
+  image: HTMLImageElement | undefined;
+})[] = [];
 
 let isMouseDown = false;
 
@@ -213,18 +53,11 @@ const Map = () => {
     e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
   ) => {
     if (isMouseDown) {
-      const diffX = Math.max(
-        Math.min(e.nativeEvent.offsetX - mousePosition.x, 0.003),
-        -0.003
-      );
-      const diffY = Math.max(
-        Math.min(e.nativeEvent.offsetY - mousePosition.y, 0.003),
-        -0.003
-      );
-      displayLog("diffX, diffY", { diffX, diffY });
-      offsetWorldPos.x = offsetWorldPos.x + diffX;
-      offsetWorldPos.y = offsetWorldPos.y + diffY;
-      await drawMap();
+      worldPos.x += (mousePosition.x - e.nativeEvent.offsetX) * rate;
+      worldPos.y += (mousePosition.y - e.nativeEvent.offsetY) * rate;
+
+      updateTiles();
+      drawTiles();
     }
     mousePosition.x = e.nativeEvent.offsetX;
     mousePosition.y = e.nativeEvent.offsetY;
@@ -232,57 +65,186 @@ const Map = () => {
 
   const handleWheel = async (e: WheelEvent<HTMLCanvasElement>) => {
     const diffZ = e.deltaY;
-    let newZoom = zoom;
-    if (diffZ < 0) {
-      newZoom += 5;
+    let newRate = rate;
+    if (diffZ > 0) {
+      newRate *= 1.05;
     } else {
-      newZoom -= 5;
+      newRate *= 0.95;
     }
-    newZoom = Math.max(newZoom, 0);
-    if (newZoom === zoom) {
+
+    if (newRate === rate) {
       return;
     }
-    zoom = newZoom;
 
-    const tileLength = getTileLength();
-    if (tileLength >= 255) {
-      level++;
-    } else if (tileLength < 255 / 2) {
-      level = Math.max(0, level--);
-    }
+    worldPos.x = worldPos.x + (rate - newRate) * mousePosition.x;
+    worldPos.y = worldPos.y + (rate - newRate) * mousePosition.y;
+    rate = newRate;
 
-    await drawMap();
+    updateTiles();
+    drawTiles();
   };
 
-  const drawMap = async () => {
-    // imageCachesからタイル画像を取得し、tile配列を作成する
-    const tiles = makeTiles();
+  const updateTiles = () => {
+    displayLog("rate", rate);
+    displayLog("worldPos", worldPos);
+    const newTiles = calcNewTiles();
 
-    // canvasに描画する
+    requestTiles(newTiles);
+    removeTile(newTiles);
+  };
+
+  const removeTile = (newTiles: Tile[]) => {
+    const currentZLevel = calcTileZLevel();
+    currentTiles = currentTiles.filter((tile) => {
+      if (tile.z !== currentZLevel) {
+        // 穴あき防止のため、zレベルが異なるものは残す
+        return true;
+      }
+      return newTiles.some(({ x, y }) => {
+        return tile.x === x && tile.y === y;
+      });
+    });
+
+    // 子孫タイルを削除
+    currentTiles = currentTiles.filter((tile) => {
+      if (tile.z < currentZLevel - 1) {
+        return false;
+      }
+      return true;
+    });
+
+    displayLog("currentTileSIze", currentTiles.length);
+  };
+
+  const drawTiles = () => {
     const ctx = canvasRef.current?.getContext("2d");
+    ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     if (ctx) {
-      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-      drawTiles(ctx, tiles);
-    }
-    const imageQueueCopy = imageRequestQueue.concat();
-    imageRequestQueue.splice(0, imageRequestQueue.length);
-    // キューの画像をオンラインから取得する
-    for (const imageQueue of imageQueueCopy) {
-      const image = await fetchImage(imageQueue);
-      if (image) {
-        imageCaches.push({
-          urlInfo: imageQueue,
-          image,
-        });
+      for (const tile of currentTiles) {
+        const image = tile.image;
+        if (image === undefined) {
+          continue;
+        }
+        const w1 = tile2World(tile.x, tile.y, tile.z);
+        const w2 = tile2World(tile.x + 1, tile.y + 1, tile.z);
+        const c1 = world2Canvas(w1);
+        const c2 = world2Canvas(w2);
+        const size = c2.x - c1.x;
+        ctx.drawImage(image, c1.x, c1.y, size, size);
       }
     }
   };
 
+  const calcNewTiles = () => {
+    const tileZLevel = calcTileZLevel();
+    const leftTopTile = world2Tile(worldPos, tileZLevel);
+    const leftTopTilePos = tile2World(
+      leftTopTile.x,
+      leftTopTile.y,
+      leftTopTile.z
+    );
+    const rightBottomPos = canvas2World({ x: CANVAS_WIDTH, y: CANVAS_HEIGHT });
+
+    const tileSize = Math.pow(2, -tileZLevel);
+
+    const newTiles: Tile[] = [];
+    for (let y = 0; leftTopTilePos.y + y * tileSize <= rightBottomPos.y; y++) {
+      for (
+        let x = 0;
+        leftTopTilePos.x + x * tileSize <= rightBottomPos.x;
+        x++
+      ) {
+        newTiles.push({
+          x: leftTopTile.x + x,
+          y: leftTopTile.y + y,
+          z: tileZLevel,
+        });
+      }
+    }
+    return newTiles;
+  };
+
+  const requestTiles = async (newTiles: Tile[]) => {
+    for (const { x, y, z } of newTiles) {
+      const maxTile = Math.pow(2, z) - 1;
+      if (x < 0 || y < 0 || x > maxTile || y > maxTile) {
+        continue;
+      }
+      if (
+        currentTiles.find((currentTile) => {
+          return (
+            currentTile.x === x && currentTile.y === y && currentTile.z === z
+          );
+        })
+      ) {
+        continue;
+      }
+      const image = document.createElement("img");
+      image.src = `${TILE_URL}/${z}/${x}/${y}.png`;
+      image.onload = () => {
+        drawTiles();
+      };
+      currentTiles.push({
+        x,
+        y,
+        z,
+        image,
+      });
+    }
+  };
+
+  const calcTileZLevel = () => {
+    let tileZLevel = 0;
+    while (true) {
+      const w1 = tile2World(0, 0, tileZLevel);
+      const w2 = tile2World(1, 1, tileZLevel);
+      const c1 = world2Canvas(w1);
+      const c2 = world2Canvas(w2);
+      const size = c2.x - c1.x;
+
+      if (size < 256) {
+        break;
+      }
+      tileZLevel++;
+    }
+    return tileZLevel;
+  };
+
+  const tile2World = (x: number, y: number, z: number) => {
+    const tileLength = Math.pow(2, -z);
+    return {
+      x: x * tileLength,
+      y: y * tileLength,
+    };
+  };
+
+  const world2Tile = (pos: Position, z: number): Tile => {
+    const tileLength = Math.pow(2, -z);
+    return {
+      x: Math.floor(pos.x / tileLength),
+      y: Math.floor(pos.y / tileLength),
+      z: z,
+    };
+  };
+
+  const world2Canvas = (pos: Position): Position => {
+    return {
+      x: (pos.x - worldPos.x) / rate,
+      y: (pos.y - worldPos.y) / rate,
+    };
+  };
+
+  const canvas2World = (pos: Position) => {
+    return {
+      x: pos.x * rate + worldPos.x,
+      y: pos.y * rate + worldPos.y,
+    };
+  };
+
   useEffect(() => {
-    (async () => {
-      await drawMap();
-      await drawMap();
-    })();
+    updateTiles();
+    drawTiles();
+    // eslint-disable-next-line
   }, []);
 
   return (
