@@ -1,6 +1,5 @@
 type FunctionData = {
   name: string;
-  path: string | undefined;
   args: {
     name: string;
     type: string;

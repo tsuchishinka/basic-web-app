@@ -1,19 +1,19 @@
 import fs from "fs";
 import papaparse, { ParseConfig, ParseStepResult } from "papaparse";
-import { FunctionData } from "./FunctionData";
+import { ComponentData } from "./ComponentData";
 
-const getInitialFunctionData = (): FunctionData => {
+const getInitialComponentData = (): ComponentData => {
   return {
     name: "",
-    path: undefined,
-    args: [],
+    children: [],
+    props: [],
+    events: [],
     types: [],
-    returnType: undefined,
-    description: "",
+    states: [],
   };
 };
 
-const parseFunctions = (csvFilePath: string): Promise<FunctionData[]> => {
+const parseComponents = (csvFilePath: string): Promise<ComponentData[]> => {
   return new Promise((resolve) => {
     const columnIndex = {
       name: 0,
@@ -23,8 +23,8 @@ const parseFunctions = (csvFilePath: string): Promise<FunctionData[]> => {
       required: 0,
     };
     let isParsing = false;
-    const functionDataList: FunctionData[] = [];
-    let functionData: FunctionData = getInitialFunctionData();
+    const componentDataList: ComponentData[] = [];
+    let componentData: ComponentData = getInitialComponentData();
     const config: ParseConfig = {
       header: false,
       delimiter: ",",
@@ -32,7 +32,6 @@ const parseFunctions = (csvFilePath: string): Promise<FunctionData[]> => {
         const { data: rowData } = results;
         if (rowData.length > 0 && rowData[0]) {
           isParsing = true;
-
           if (rowData[0].includes("#")) {
             rowData.forEach((data, index) => {
               if (
@@ -54,15 +53,17 @@ const parseFunctions = (csvFilePath: string): Promise<FunctionData[]> => {
           const description =
             rowData.length > columnIndex.description
               ? rowData[columnIndex.description]
-              : "";
+              : undefined;
           const defaultData =
             rowData.length > columnIndex.default
               ? rowData[columnIndex.default]
-              : "";
+              : undefined;
           const required =
             rowData.length > columnIndex.required
               ? rowData[columnIndex.required] === "TRUE"
               : false;
+          const args = type?.split("=>")[0];
+          const returnTypeStr = type?.split("=>")[1]?.trim();
 
           if (name === undefined) {
             return;
@@ -70,46 +71,59 @@ const parseFunctions = (csvFilePath: string): Promise<FunctionData[]> => {
 
           const rowHeader = rowData[0];
           if (rowHeader === "name") {
-            functionData.name = name;
-            functionData.returnType = type;
-            functionData.description = description;
-          } else if (rowHeader.includes("path")) {
-            functionData.path = name;
-          } else if (rowHeader.includes("arg")) {
-            if (type !== undefined) {
-              functionData.args.push({
-                name,
-                type,
-                default: defaultData,
-                required,
-                description,
-              });
-            }
-          } else if (rowHeader.includes("type")) {
-            if (type !== undefined) {
-              functionData.types.push({
-                name,
-                type,
-                description,
-              });
-            }
+            componentData.name = name;
+          } else if (rowHeader === "props") {
+            componentData.props.push({
+              name,
+              type,
+              description,
+              default: defaultData,
+              required,
+            });
+          } else if (rowHeader === "state") {
+            componentData.states.push({
+              name,
+              type,
+              description,
+              default: defaultData,
+            });
+          } else if (rowHeader === "type") {
+            componentData.types.push({
+              name,
+              type,
+              description,
+            });
+          } else if (rowHeader === "event") {
+            componentData.events.push({
+              name,
+              args: args
+                ? args
+                    .match(/\([\s\S]*\)/g)
+                    ?.toString()
+                    .slice(1, -1)
+                : undefined,
+              returnType: returnTypeStr,
+              description,
+            });
+          } else if (rowHeader === "child") {
+            componentData.children.push(name);
           }
         } else if (isParsing) {
           // コンポーネントの区切りで空行になった時
           isParsing = false;
-          functionDataList.push(functionData);
-          functionData = getInitialFunctionData();
+          componentDataList.push(componentData);
+          componentData = getInitialComponentData();
         }
       },
       complete() {
         if (isParsing) {
-          functionDataList.push(functionData);
+          componentDataList.push(componentData);
         }
-        resolve(functionDataList);
+        resolve(componentDataList);
       },
     };
     const file = fs.readFileSync(csvFilePath, "utf-8");
     papaparse.parse(file, config);
   });
 };
-export { parseFunctions };
+export { parseComponents };
