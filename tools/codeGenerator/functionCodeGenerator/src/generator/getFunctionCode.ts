@@ -5,7 +5,7 @@ import {
   DESCRIPTION_TEMPLATE,
   FUNCTION_TEMPLATE,
   TYPE_TEMPLATE,
-} from "./template";
+} from "../template/function";
 
 const getTypeCode = (types: FunctionData["types"]) => {
   return types
