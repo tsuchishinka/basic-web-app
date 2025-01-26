@@ -1,6 +1,7 @@
-import { ComponentData } from "../../parser/ComponentData";
-import { convertUpperCamelCase } from "../../utils/convertUpperCamelCase";
+import { ComponentData } from "../parser/ComponentData";
 import {
+  CHILD_COMPONENT_TEMPLATE,
+  CHILD_IMPORT_TEMPLTE,
   COMPONENT_TEMPLATE,
   DEFAULT_TEMPLATE,
   DEFAULT_VALUE_TEMPLATE,
@@ -12,7 +13,8 @@ import {
   STATE_TEMPLATE,
   STATE_TYPE_TEMPLATE,
   TYPE_TEMPLATE,
-} from "./template";
+} from "../template/component";
+import { convertUpperCamelCase } from "../utils/convertUpperCamelCase";
 
 const getPropsCode = (propsList: ComponentData["props"]) => {
   return propsList
@@ -98,6 +100,22 @@ const getEventCode = (eventList: ComponentData["events"]) => {
     .join("\n");
 };
 
+const getChildComponentCode = (children: ComponentData["children"]) => {
+  return children
+    .map((child) => {
+      return CHILD_COMPONENT_TEMPLATE.replace(/\{\$CHILD_NAME\}/g, child);
+    })
+    .join("\n");
+};
+
+const getChildImportCode = (children: ComponentData["children"]) => {
+  return children
+    .map((child) => {
+      return CHILD_IMPORT_TEMPLTE.replace(/\{\$CHILD_NAME\}/g, child);
+    })
+    .join("\n");
+};
+
 const getComponentCode = (componentData: ComponentData) => {
   return COMPONENT_TEMPLATE.replace(
     /\{\$PROPS\}/g,
@@ -106,6 +124,11 @@ const getComponentCode = (componentData: ComponentData) => {
     .replace(/\{\$NAME\}/g, convertUpperCamelCase(componentData.name))
     .replace(/\{\$SCSS_NAME\}/g, componentData.name)
     .replace(/\{\$DEFAULT\}/g, getInitialValue(componentData.props))
+    .replace(/\{\$CHILD_IMPORT\}/g, getChildImportCode(componentData.children))
+    .replace(
+      /\{\$CHILD_COMPONENT\}/g,
+      getChildComponentCode(componentData.children)
+    )
     .replace(/\{\$STATE\}/g, getStateCode(componentData.states))
     .replace(/\{\$EVENT\}/g, getEventCode(componentData.events))
     .replace(/\{\$TYPE\}/g, getTypeCode(componentData.types));

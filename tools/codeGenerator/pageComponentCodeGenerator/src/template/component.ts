@@ -21,10 +21,15 @@ const EVENT_TEMPLATE = `const {$NAME} = {$ASYNC}({$ARG_TYPE}){$RETURN_TYPE} => {
   // 処理を記述
 }`;
 
+const CHILD_IMPORT_TEMPLTE = `import { {$CHILD_NAME} } from './{$CHILD_NAME}'`;
+
+const CHILD_COMPONENT_TEMPLATE = `      <{$CHILD_NAME} />`;
+
 const COMPONENT_TEMPLATE = `import { CSSProperties, ReactNode } from 'react'
 import styles from './index.module.scss'
 // import clsx from 'clsx'
 // import { useState } from 'react'
+{$CHILD_IMPORT}
 
 {$TYPE}
 
@@ -42,6 +47,7 @@ const {$NAME} = ({
   return (
     <div className={styles.{$SCSS_NAME}}>
       {/** JSXを記述 **/}
+{$CHILD_COMPONENT}
     </div>
   )
 }
@@ -50,6 +56,8 @@ export { {$NAME} }
 `;
 
 export {
+  CHILD_COMPONENT_TEMPLATE,
+  CHILD_IMPORT_TEMPLTE,
   COMPONENT_TEMPLATE,
   DEFAULT_TEMPLATE,
   DEFAULT_VALUE_TEMPLATE,
